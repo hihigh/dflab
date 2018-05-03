@@ -10,6 +10,8 @@
 
 var errorElement = document.querySelector('#errorMsg');
 var video = document.querySelector('video');
+var isLoaded = false;
+var timer;
 
 // Put variables in global scope to make them available to the browser console.
 var constraints = window.constraints = {
@@ -65,8 +67,17 @@ function readyStart(isDebug){
         drawCanvas();
     }
 
+    timer = setInterval(checkVideoLoad, 100)
+}
 
-    loadTexture();
+function checkVideoLoad(){
+
+    if(video.videoWidth != 0){
+        isLoaded = true;
+        clearInterval(timer);
+
+        loadTexture();
+    }
 
 }
 
@@ -167,16 +178,15 @@ function loadTexture() {
 
 function setPlane(texture){
     if ( mesh ) { stage.removeChild(mesh); }
-
     mesh = new PIXI.mesh.Plane( texture, options.pointsX, options.pointsY);
 
-    resizePer = stageH/texture.height;
+    resizePer = renderer.width/video.videoWidth;
 
     mesh.width = texture.width * resizePer;
     mesh.height = texture.height * resizePer;
 
-    mesh.x = ( stageW - mesh.width ) * 0.5;
-    mesh.y = ( stageH - mesh.height ) * 0.5;
+    mesh.x = 0//( stageW - mesh.width ) * 0.5;
+    mesh.y = 0//( stageH - mesh.height ) * 0.5;
 
     spacingX = mesh.width / (options.pointsX-1);
     spacingY = mesh.height / (options.pointsY-1);
@@ -185,8 +195,25 @@ function setPlane(texture){
 
     stage.addChildAt(mesh,0);
 
+
+
 }
 
+function resizeMesh(){
+    resizePer = mesh.width/texture.width;
+
+    mesh.width = texture.width * resizePer;
+    mesh.height = texture.height * resizePer;
+
+    mesh.x = 0//( stageW - mesh.width ) * 0.5;
+    mesh.y = 0//( stageH - mesh.height ) * 0.5;
+
+    spacingX = mesh.width / (options.pointsX-1);
+    spacingY = mesh.height / (options.pointsY-1);
+
+    console.log("resizeMesh : ", resizePer, "?", video.videoWidth, mesh.width, mesh.height, texture.width, texture.height)
+    texture.update()
+}
 
 
 
@@ -234,7 +261,6 @@ class Segment {
     calcuFunc(point , idx){
         let index = idx * 2;
 
-
         var min = (options.pointsX*2);
         var max = ((options.pointsX*options.pointsY)*2)-min;
 
@@ -242,9 +268,6 @@ class Segment {
             mesh.vertices[index] = point.x/resizePer;
             mesh.vertices[index+1] = point.y/resizePer;
         }
-
-
-
     }
 
     reset(){
