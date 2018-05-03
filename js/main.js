@@ -46,7 +46,7 @@ function handleError(error) {
 }
 
 function errorMsg(msg, error) {
-    errorElement.innerHTML += '<p>' + msg + '</p>';
+    // errorElement.innerHTML += '<p>' + msg + '</p>';
     if (typeof error !== 'undefined') {
         console.error(error);
     }
@@ -63,7 +63,7 @@ var canvas = document.getElementById('draw-canvas');
 var ctx = canvas.getContext('2d');
 
 function onResize() {
-    canvas.width = window.innerWidth;
+    canvas.width = window.innerWidth
     canvas.height = window.innerHeight
 }
 
@@ -71,7 +71,7 @@ function drawCanvas(){
     window.requestAnimationFrame(drawCanvas);
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(video, 0, 0, video.width, video.height, 0, 0, canvas.width, canvas.height);
 
 
 

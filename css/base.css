@@ -24,7 +24,7 @@ body {
     background-color: var(--color-bg);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow: hidden;
+    /*overflow: hidden;*/
 
 }
 
@@ -75,7 +75,7 @@ a:focus {
 
 
 
-canvas { position: absolute; top: 0; left: 0; z-index: -1; width: 100%;}
+/*canvas { position: absolute; top: 0; left: 0; z-index: -1; width: 100%;}*/
 canvas + canvas { opacity: 0.3; z-index: -2; }
 
 

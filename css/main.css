@@ -121,8 +121,12 @@ textarea {
 
 video {
   background: #222;
-  margin: 0 0 20px 0;
-  width: 100%;
+}
+
+video.add {
+  position: absolute;
+
+
 }
 
 @media screen and (max-width: 650px) {
