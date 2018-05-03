@@ -12,6 +12,8 @@ var errorElement = document.querySelector('#errorMsg');
 var video = document.querySelector('video');
 var isLoaded = false;
 var timer = 0;
+var randomHArr = [];
+var maxLine = 15;
 
 
 // Put variables in global scope to make them available to the browser console.
@@ -56,16 +58,11 @@ function errorMsg(msg, error) {
     }
 }
 
-var randomHArr = [];
+
 function readyStart(isDebug){
     video.classList.add("add");
 
-    for(var j=0 ; j<10 ; j++){
-        randomHArr.push(j);
-    }
-    randomHArr.sort(function() { return 0.5 - Math.random() });
-    console.log(randomHArr)
-
+    sortPosition();
 
     if(isDebug){
         sampleVideo();
@@ -75,8 +72,18 @@ function readyStart(isDebug){
         onResize();
         drawCanvas();
     }
+
+    window.addEventListener("click", sortPosition)
 }
 
+
+function sortPosition(){
+    randomHArr = [];
+    for(var j=0 ; j<maxLine ; j++){
+        randomHArr.push(j);
+    }
+    randomHArr.sort(function() { return 0.5 - Math.random() });
+}
 
 
 function sampleVideo(){
@@ -112,7 +119,7 @@ function drawCanvas(){
     // ctx.drawImage(video, 0, 0, video.videoWidth,  video.videoHeight, 0, 0, canvas.width, canvas.height);
 
 
-    var particleNum = 10;
+    var particleNum = maxLine;
 
     var per = 0.3;
     var particleH = Math.ceil(canvas.height / particleNum);
