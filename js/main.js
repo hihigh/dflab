@@ -157,7 +157,9 @@ var texture;
 
 
 function loadTexture() {
-    texture = PIXI.Texture.fromCanvas(canvas);
+    // texture = PIXI.Texture.fromCanvas(canvas);
+    texture = PIXI.Texture.fromVideo(video);
+
     setPlane(texture);
 }
 
@@ -266,8 +268,8 @@ class Point {
 
     init(){
         this.randomize();
-        this.x = mesh.width/2;
-        this.y = mesh.height/2;
+        /*this.x = mesh.width/2;
+        this.y = mesh.height/2;*/
     }
 
     animateTo(nx, ny, force, callback) {
