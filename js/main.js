@@ -42,7 +42,9 @@ function handleError(error) {
     }
     errorMsg('getUserMedia error: ' + error.name, error);
 
+    sampleVideo();
     onResize();
+    drawCanvas();
 }
 
 function errorMsg(msg, error) {
@@ -50,6 +52,13 @@ function errorMsg(msg, error) {
     if (typeof error !== 'undefined') {
         console.error(error);
     }
+}
+
+function sampleVideo(){
+    video.setAttribute("src", "./video/test.mp4");
+    video.load();
+
+
 }
 
 navigator.mediaDevices.getUserMedia(constraints).
@@ -63,15 +72,28 @@ var canvas = document.getElementById('draw-canvas');
 var ctx = canvas.getContext('2d');
 
 function onResize() {
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 }
 
 function drawCanvas(){
     window.requestAnimationFrame(drawCanvas);
 
+    /*ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(video, 0, 0, video.videoWidth,  video.videoHeight, 0, 0, canvas.width, canvas.height);*/
+
+    var per = (canvas.height / video.videoHeight);
+
+    const imgX = 0;//(canvas.width / 2 - video.videoWidth / 2) * (canvas.height / video.videoHeight);
+    const imgY = (canvas.height / 2 - video.videoHeight / 2) * (canvas.height / video.videoHeight);
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(video, 0, 0, video.width, video.height, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(video, 0, 0, canvas.width/per, canvas.height/per,
+        0, 0, canvas.width, canvas.height
+    );
+
+
+    console.log(per)
 
 
 

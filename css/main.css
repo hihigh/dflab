@@ -121,6 +121,7 @@ textarea {
 
 video {
   background: #222;
+  width: 100%;
 }
 
 video.add {
