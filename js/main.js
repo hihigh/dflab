@@ -26,6 +26,9 @@ function handleSuccess(stream) {
     };
     window.stream = stream; // make variable available to browser console
     video.srcObject = stream;
+
+    onResize();
+    drawCanvas();
 }
 
 function handleError(error) {
@@ -38,6 +41,8 @@ function handleError(error) {
             'order for the demo to work.');
     }
     errorMsg('getUserMedia error: ' + error.name, error);
+
+    onResize();
 }
 
 function errorMsg(msg, error) {
@@ -49,3 +54,44 @@ function errorMsg(msg, error) {
 
 navigator.mediaDevices.getUserMedia(constraints).
 then(handleSuccess).catch(handleError);
+
+
+
+
+//canvas
+var canvas = document.getElementById('draw-canvas');
+var ctx = canvas.getContext('2d');
+
+function onResize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight
+}
+
+function drawCanvas(){
+    window.requestAnimationFrame(drawCanvas);
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
