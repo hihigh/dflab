@@ -40,7 +40,7 @@ word-break: break-word;
 }
 
 canvas {
-  background-color: #ccc;
+  background-color: #000;
   max-width: 100%;
   width: 100%;
 }
@@ -162,7 +162,19 @@ video.add {
 
 #container {
   transform-origin: top;
-  transform: scale(0.5);
+  /*transform: scale(0.5);*/
+}
+
+#container h2{
+  position: absolute;
+  top: 0;
+
+}
+
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+
 }
 
 h2 {
@@ -172,7 +184,7 @@ h2 {
 .wrapper-video {
   position: fixed;
   top: 0;
-  background-color: #FF0000;
+  background-color: #000;
   width: 20px;
   height: 20px;
 }

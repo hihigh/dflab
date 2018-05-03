@@ -112,15 +112,13 @@ function drawCanvas(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(video, 0, 0, video.videoWidth,  video.videoHeight, 0, 0, canvas.width, canvas.height);
 
-    if ( segment ) { segment.update() }
+    // if ( segment ) { segment.update() }
+    // if ( texture ) { texture.update(); }
+
     renderer.render(stage);
-    if ( texture ) { texture.update(); }
-    // texture.update()
 
 
 }
-
-
 
 
 
@@ -265,15 +263,17 @@ class Segment {
         var max = ((options.pointsX*options.pointsY)*2)-min;
 
         if(index > min && index < max){
-            mesh.vertices[index] = point.x/resizePer;
-            mesh.vertices[index+1] = point.y/resizePer;
+            var pt = point.getPoint();
+
+            mesh.vertices[index] = pt.x/resizePer;
+            mesh.vertices[index+1] = pt.y/resizePer;
         }
     }
 
     reset(){
-        this.points.forEach((point) => {
+        /*this.points.forEach((point) => {
             point.reset()
-    })
+        })*/
     }
 
 
@@ -291,8 +291,18 @@ class Point {
 
     init(){
         this.randomize();
-        /*this.x = mesh.width/2;
+
+        /*this.randomize();
+        this.x = mesh.width/2;
         this.y = mesh.height/2;*/
+    }
+
+    getPoint(){
+        let gap = 5;
+        this.x = this.origX + ((Math.random() * gap) - gap*0.5);
+        this.y = this.origY + ((Math.random() * gap) - gap*0.5);
+
+        return {x:this.x, y:this.y}
     }
 
     animateTo(nx, ny, force, callback) {
