@@ -168,3 +168,7 @@ video.add {
 h2 {
   color: #eeeeee;
 }
+
+.wrapper-video {
+  width: 1px;
+}
