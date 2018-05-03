@@ -61,7 +61,8 @@ function readyStart(isDebug){
         onResize();
         drawCanvas();
     } else {
-
+        onResize();
+        drawCanvas();
     }
 
 
