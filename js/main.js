@@ -93,15 +93,18 @@ function onResize() {
     canvas.height = window.innerHeight;
 }
 
+
+
 function drawCanvas(){
     window.requestAnimationFrame(drawCanvas);
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(video, 0, 0, video.videoWidth,  video.videoHeight, 0, 0, canvas.width, canvas.height);
 
-    /*if ( segment ) { segment.update() }
-    renderer.render(stage);*/
-
+    if ( segment ) { segment.update() }
+    renderer.render(stage);
+    if ( texture ) { texture.update(); }
+    // texture.update()
 
 
 }
@@ -130,8 +133,8 @@ var stageH = window.innerHeight;
 var resizePer = 1;
 
 var options = {
-    pointsX: 50,
-    pointsY: 50 * 1.7,
+    pointsX: 20,
+    pointsY: 20 * 1.7,
 
     pointCount: 2000
 };
