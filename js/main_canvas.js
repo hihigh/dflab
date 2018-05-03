@@ -15,6 +15,7 @@ var timer = 0;
 var randomHArr = [];
 var maxLine = 15;
 var isLive = true;
+var spd = 6;
 
 
 // Put variables in global scope to make them available to the browser console.
@@ -167,16 +168,16 @@ function drawCanvas(){
     } else {
 
 
-        if(timer % 6 == 0){
+        if(timer % spd == 0){
             var img = saveImgArr[saveImgIndex];
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
             if(directSq == 1){
                 saveImgIndex = saveImgIndex + 1;
-                if(saveImgIndex >= saveImgArr.length){
+                if(saveImgIndex == saveImgArr.length){
                     directSq = -1;
-                    saveImgIndex -= 1;
+                    saveImgIndex = saveImgArr.length-1;
                 }
             } else {
                 saveImgIndex = saveImgIndex - 1;
