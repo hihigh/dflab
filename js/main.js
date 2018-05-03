@@ -27,7 +27,7 @@ function handleSuccess(stream) {
     window.stream = stream; // make variable available to browser console
     video.srcObject = stream;
 
-    // video.classList.add("add");
+    video.classList.add("add");
 
     onResize();
     drawCanvas();
