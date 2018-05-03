@@ -125,8 +125,8 @@ video {
 }
 
 video.add {
-  position: absolute;
-  top:-10000px;
+  /*position: absolute;
+  top:-10000px;*/
 
 
 }
