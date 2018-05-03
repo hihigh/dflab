@@ -170,5 +170,9 @@ h2 {
 }
 
 .wrapper-video {
-  width: 1px;
+  position: fixed;
+  top: 0;
+  background-color: #FF0000;
+  width: 20px;
+  height: 20px;
 }
