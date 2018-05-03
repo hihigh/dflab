@@ -167,7 +167,7 @@ function drawCanvas(){
     } else {
 
 
-        if(timer % 8 == 0){
+        if(timer % 6 == 0){
             var img = saveImgArr[saveImgIndex];
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
