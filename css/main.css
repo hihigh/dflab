@@ -164,3 +164,7 @@ video.add {
   transform-origin: top;
   transform: scale(0.5);
 }
+
+h2 {
+  color: #eeeeee;
+}

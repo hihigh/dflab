@@ -142,7 +142,7 @@ var stage = new PIXI.Container();
 PIXI.settings.RESOLUTION = window.devicePixelRatio;
 var renderer = PIXI.autoDetectRenderer(stageW, stageH, { transparent: true });
 
-var root = document.querySelector("#container");
+var root = document.querySelector("#root");
 root.appendChild(renderer.view);
 renderer.render(stage);
 
