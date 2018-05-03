@@ -91,14 +91,21 @@ function readyStart(isDebug){
 
 var saveImgArr = [];
 var saveImgIndex = 0;
+var directSq = 1;
 
 function showSq(){
     saveImgArr = document.querySelectorAll(".wrapper-capture img");
+    if(saveImgArr.length == 0) return;
+
+    var con = document.querySelector(".wrapper-capture");
+    con.classList.add("hidden");
+
     isLive = false;
 }
 
 function reset(){
     var con = document.querySelector(".wrapper-capture");
+    con.classList.remove("hidden");
     con.innerHTML = "";
     saveImgArr = [];
     saveImgIndex = 0;
@@ -160,11 +167,26 @@ function drawCanvas(){
     } else {
 
 
-        if(timer % 3 == 0){
+        if(timer % 8 == 0){
             var img = saveImgArr[saveImgIndex];
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            saveImgIndex = (saveImgIndex+1) % saveImgArr.length
+
+            if(directSq == 1){
+                saveImgIndex = saveImgIndex + 1;
+                if(saveImgIndex >= saveImgArr.length){
+                    directSq = -1;
+                    saveImgIndex -= 1;
+                }
+            } else {
+                saveImgIndex = saveImgIndex - 1;
+                if(saveImgIndex < 0){
+                    directSq = 1;
+                    saveImgIndex = 0;
+                }
+            }
+
+            // saveImgIndex = (saveImgIndex+1) % saveImgArr.length
         }
 
 
