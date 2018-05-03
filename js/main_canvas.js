@@ -14,6 +14,7 @@ var isLoaded = false;
 var timer = 0;
 var randomHArr = [];
 var maxLine = 15;
+var isLive = true;
 
 
 // Put variables in global scope to make them available to the browser console.
@@ -73,9 +74,48 @@ function readyStart(isDebug){
         drawCanvas();
     }
 
-    window.addEventListener("click", sortPosition)
+    // window.addEventListener("click", sortPosition)
+
+    var container = document.querySelector("#container");
+    container.addEventListener("touchstart", captureImage);
+
+    var btnShow = document.querySelector(".js-btn-show");
+    btnShow.addEventListener("touchstart", showSq);
+
+    var btnReset = document.querySelector(".js-btn-reset");
+    btnReset.addEventListener("touchstart", reset);
+
+
+
 }
 
+var saveImgArr = [];
+var saveImgIndex = 0;
+
+function showSq(){
+    saveImgArr = document.querySelectorAll(".wrapper-capture img");
+    isLive = false;
+}
+
+function reset(){
+    var con = document.querySelector(".wrapper-capture");
+    con.innerHTML = "";
+    saveImgArr = [];
+    saveImgIndex = 0;
+
+    isLive = true;
+}
+
+
+
+function captureImage(){
+    var container = document.querySelector(".wrapper-capture");
+
+    var img = document.createElement('img');
+    img.src = canvas.toDataURL();
+    container.appendChild(img)
+
+}
 
 function sortPosition(){
     randomHArr = [];
@@ -109,8 +149,63 @@ function onResize() {
 }
 
 
-
 function drawCanvas(){
+    window.requestAnimationFrame(drawCanvas);
+
+    timer++;
+
+    if(isLive){
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(video, 0, 0, video.videoWidth,  video.videoHeight, 0, 0, canvas.width, canvas.height);
+    } else {
+
+
+        if(timer % 3 == 0){
+            var img = saveImgArr[saveImgIndex];
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            saveImgIndex = (saveImgIndex+1) % saveImgArr.length
+        }
+
+
+
+
+
+    }
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function drawCanvas_zigzag(){
     window.requestAnimationFrame(drawCanvas);
 
     timer++;
