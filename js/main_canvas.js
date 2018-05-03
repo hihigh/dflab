@@ -163,10 +163,11 @@ function drawCanvas(){
     timer++;
 
     if(isLive){
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.globalAlpha = 0.02
+        // ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(video, 0, 0, video.videoWidth,  video.videoHeight, 0, 0, canvas.width, canvas.height);
     } else {
-
+        ctx.globalAlpha = 1
 
         if(timer % spd == 0){
             var img = saveImgArr[saveImgIndex];

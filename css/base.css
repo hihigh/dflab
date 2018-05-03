@@ -89,3 +89,16 @@ canvas + canvas { opacity: 0.3; z-index: -2; }
     color: #aaa;
     font-family: monospace;
 }
+
+.filter-video {
+    /*-webkit-filter: blur(3px);*/
+    /*-webkit-filter: grayscale(1);*/
+    /*-webkit-filter: sepia(1);*/
+    /*-webkit-filter: brightness(2.5);*/
+    /*-webkit-filter: contrast(5);*/
+    /*-webkit-filter: hue-rotate(125deg);*/
+    /*-webkit-filter: invert(1);*/
+    /*-webkit-filter: saturate(3);*/
+    /*-webkit-filter: opacity(0.3);*/
+}
+
