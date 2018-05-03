@@ -83,10 +83,10 @@ function onResize() {
 function drawCanvas(){
     window.requestAnimationFrame(drawCanvas);
 
-    /*ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(video, 0, 0, video.videoWidth,  video.videoHeight, 0, 0, canvas.width, canvas.height);*/
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(video, 0, 0, video.videoWidth,  video.videoHeight, 0, 0, canvas.width, canvas.height);
 
-    var per = (canvas.height / video.videoHeight);
+    /*var per = (canvas.height / video.videoHeight);
 
     const imgX = 0;//(canvas.width / 2 - video.videoWidth / 2) * (canvas.height / video.videoHeight);
     const imgY = (canvas.height / 2 - video.videoHeight / 2) * (canvas.height / video.videoHeight);
@@ -94,7 +94,7 @@ function drawCanvas(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(video, 0, 0, canvas.width/per, canvas.height/per,
         0, 0, canvas.width, canvas.height
-    );
+    );*/
 
 
     // console.log(per)
