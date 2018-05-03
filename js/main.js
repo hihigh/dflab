@@ -27,6 +27,8 @@ function handleSuccess(stream) {
     window.stream = stream; // make variable available to browser console
     video.srcObject = stream;
 
+    video.classList.add("add");
+
     onResize();
     drawCanvas();
 }
@@ -41,6 +43,8 @@ function handleError(error) {
             'order for the demo to work.');
     }
     errorMsg('getUserMedia error: ' + error.name, error);
+
+    video.classList.add("add");
 
     sampleVideo();
     onResize();
@@ -93,7 +97,7 @@ function drawCanvas(){
     );
 
 
-    console.log(per)
+    // console.log(per)
 
 
 
