@@ -5,9 +5,7 @@
  *  that can be found in the LICENSE file in the root of the source
  *  tree.
  */
-.hidden {
-  display: none;
-}
+
 
 .highlight {
   background-color: #eee;
@@ -158,3 +156,11 @@ video.add {
 }
 
 
+
+
+
+
+#container {
+  transform-origin: top;
+  transform: scale(0.5);
+}

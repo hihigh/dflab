@@ -13,9 +13,10 @@
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="manifest" href="http://dev.designfever.com/lab/manifest.json">
 
-    <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="css/main.css?unq=0">
-    <link rel="stylesheet" href="css/base.css?unq=0">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/base.css">
+
 
 </head>
 
@@ -23,16 +24,17 @@
 
 <div id="container">
 
+    <canvas id="draw-canvas" width="0" height="0"></canvas>
     <video id="gum-local" autoplay playsinline></video>
 
     <!--<div id="errorMsg"></div>-->
 
-    <canvas id="draw-canvas" width="0" height="0"></canvas>
 
 </div>
 
+<script type="text/javascript" src="js/common_withPixi.bundle.js"></script>
 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-<script src="js/main.js?unq=0"></script>
+<script src="js/main.js"></script>
 
 
 </body>
