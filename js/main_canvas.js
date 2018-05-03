@@ -11,7 +11,8 @@
 var errorElement = document.querySelector('#errorMsg');
 var video = document.querySelector('video');
 var isLoaded = false;
-var timer;
+var timer = 0;
+
 
 // Put variables in global scope to make them available to the browser console.
 var constraints = window.constraints = {
@@ -55,8 +56,16 @@ function errorMsg(msg, error) {
     }
 }
 
+var randomHArr = [];
 function readyStart(isDebug){
     video.classList.add("add");
+
+    for(var j=0 ; j<10 ; j++){
+        randomHArr.push(j);
+    }
+    randomHArr.sort(function() { return 0.5 - Math.random() });
+    console.log(randomHArr)
+
 
     if(isDebug){
         sampleVideo();
@@ -66,20 +75,8 @@ function readyStart(isDebug){
         onResize();
         drawCanvas();
     }
-
-    timer = setInterval(checkVideoLoad, 100)
 }
 
-function checkVideoLoad(){
-
-    if(video.videoWidth != 0){
-        isLoaded = true;
-        clearInterval(timer);
-
-        loadTexture();
-    }
-
-}
 
 
 function sampleVideo(){
@@ -109,16 +106,20 @@ function onResize() {
 function drawCanvas(){
     window.requestAnimationFrame(drawCanvas);
 
+    timer++;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     // ctx.drawImage(video, 0, 0, video.videoWidth,  video.videoHeight, 0, 0, canvas.width, canvas.height);
 
 
-    var particleNum = 20;
+    var particleNum = 10;
 
     var per = 0.3;
     var particleH = Math.ceil(canvas.height / particleNum);
     var ran = 0;
-    var ran_gap = 30;
+    var ran_gap = 20;
+
+
 
     for (var i = 0; i < particleNum; i++) {
         ran = ran_gap;
@@ -126,11 +127,11 @@ function drawCanvas(){
         if(i%2){
             ctx.drawImage(video,
                 0, (video.videoHeight/particleNum)*i, video.videoWidth,  video.videoHeight/particleNum,
-                ran_gap, (canvas.height/particleNum)*i, canvas.width, canvas.height/particleNum);
+                0, (canvas.height/particleNum)*randomHArr[i], canvas.width, canvas.height/particleNum);
         } else {
             ctx.drawImage(video,
                 0, (video.videoHeight/particleNum)*i, video.videoWidth,  video.videoHeight/particleNum,
-                -ran_gap, (canvas.height/particleNum)*i, canvas.width, canvas.height/particleNum);
+                -0, (canvas.height/particleNum)*randomHArr[i], canvas.width, canvas.height/particleNum);
             // ctx.drawImage(video, 0, 0, video.videoWidth,  video.videoHeight, 0, 0, canvas.width, canvas.height);
         }
     }
