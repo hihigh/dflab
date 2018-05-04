@@ -17,6 +17,8 @@ var maxLine = 15;
 var isLive = true;
 var spd = 6;
 
+var gif;
+
 
 // Put variables in global scope to make them available to the browser console.
 var constraints = window.constraints = {
@@ -66,6 +68,7 @@ function errorMsg(msg, error) {
 function readyStart(isDebug){
     video.classList.add("add");
 
+    settingGif();
     sortPosition();
 
     if(isDebug){
@@ -88,8 +91,20 @@ function readyStart(isDebug){
     var btnReset = document.querySelector(".js-btn-reset");
     btnReset.addEventListener("touchstart", reset);
 
+    var btnGif = document.querySelector(".js-btn-save");
+    btnGif.addEventListener("touchstart", showGif);
 
+}
 
+function settingGif(){
+    gif = new GIF({
+        workers: 1,
+        quality: 5
+    });
+
+    gif.on('finished', function(blob) {
+        window.open(URL.createObjectURL(blob));
+    });
 }
 
 var saveImgArr = [];
@@ -105,10 +120,6 @@ function showSq(){
 
     isLive = false;
 
-    console.log(constraints.video)
-
-    constraints.video = "true"
-    console.log(constraints.video)
 }
 
 function reset(){
@@ -122,13 +133,29 @@ function reset(){
 }
 
 
+function showGif(){
+
+    gif.render();
+}
+
+
+
+
 
 function captureImage(){
     var container = document.querySelector(".wrapper-capture");
 
     var img = document.createElement('img');
+
     img.src = canvas.toDataURL();
-    container.appendChild(img)
+    container.appendChild(img);
+
+    console.log(ctx.getImageData(0,0,canvas.width, canvas.height))
+    // gif.addFrame(img);
+    // gif.addFrame(ctx, {delay: 1, copy: true});
+    gif.addFrame(canvas, {delay: 300});
+
+    console.log(gif)
 
 }
 
@@ -161,18 +188,27 @@ var ctx = canvas.getContext('2d');
 function onResize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
+    // console.log(document.body.offsetHeight, window.innerHeight )
 }
 
 
 function drawCanvas(){
     window.requestAnimationFrame(drawCanvas);
+    // onResize();
+
+    if(canvas.width != video.videoWidth){
+        /*canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight*/
+    }
+
+    // console.log(video.videoWidth)
 
     timer++;
 
     if(isLive){
         // ctx.globalAlpha = 0.02
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
         ctx.drawImage(video, 0, 0, video.videoWidth,  video.videoHeight, 0, 0, canvas.width, canvas.width*(video.videoHeight/video.videoWidth));
     } else {
         ctx.globalAlpha = 1;
