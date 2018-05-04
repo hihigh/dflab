@@ -21,7 +21,8 @@ var spd = 6;
 // Put variables in global scope to make them available to the browser console.
 var constraints = window.constraints = {
     audio: false,
-    video: true
+    // video: true
+    video: { facingMode: { exact: "environment" } }
 };
 
 function handleSuccess(stream) {
