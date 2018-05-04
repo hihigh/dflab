@@ -38,6 +38,7 @@ function handleSuccess(stream) {
     readyStart();
 
 
+
 }
 
 function handleError(error) {
@@ -103,6 +104,11 @@ function showSq(){
     con.classList.add("hidden");
 
     isLive = false;
+
+    console.log(constraints.video)
+
+    constraints.video = "true"
+    console.log(constraints.video)
 }
 
 function reset(){
