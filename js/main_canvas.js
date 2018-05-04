@@ -201,14 +201,13 @@ function drawCanvas(){
         canvas.height = video.videoHeight*/
     }
 
-    // console.log(video.videoWidth)
 
     timer++;
 
     if(isLive){
         // ctx.globalAlpha = 0.02
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(video, 0, 0, video.videoWidth,  video.videoHeight, 0, 0, canvas.width, canvas.width*(video.videoHeight/video.videoWidth));
+        ctx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight, 0, 0, canvas.width, canvas.width*(video.videoHeight/video.videoWidth));
     } else {
         ctx.globalAlpha = 1;
 
