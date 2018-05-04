@@ -17,7 +17,7 @@ var maxLine = 15;
 var isLive = true;
 var spd = 6;
 
-var gif;
+// var gif;
 
 
 // Put variables in global scope to make them available to the browser console.
@@ -68,7 +68,6 @@ function errorMsg(msg, error) {
 function readyStart(isDebug){
     video.classList.add("add");
 
-    settingGif();
     sortPosition();
 
     if(isDebug){
@@ -91,8 +90,8 @@ function readyStart(isDebug){
     var btnReset = document.querySelector(".js-btn-reset");
     btnReset.addEventListener("touchstart", reset);
 
-    var btnGif = document.querySelector(".js-btn-save");
-    btnGif.addEventListener("touchstart", showGif);
+    // var btnGif = document.querySelector(".js-btn-save");
+    // btnGif.addEventListener("touchstart", showGif);
 
 }
 
@@ -153,9 +152,9 @@ function captureImage(){
     console.log(ctx.getImageData(0,0,canvas.width, canvas.height))
     // gif.addFrame(img);
     // gif.addFrame(ctx, {delay: 1, copy: true});
-    gif.addFrame(canvas, {delay: 300});
+    // gif.addFrame(canvas, {delay: 300});
 
-    console.log(gif)
+    // console.log(gif)
 
 }
 
