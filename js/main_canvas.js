@@ -104,6 +104,9 @@ function settingGif(){
 
     gif.on('finished', function(blob) {
         alert("save img")
+        var comp = document.querySelector(".complete-img");
+        comp.src = URL.createObjectURL(blob);
+
         window.open(URL.createObjectURL(blob), "_blank");
         document.querySelector("body").classList.remove("no-btn");
 
