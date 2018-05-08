@@ -17,7 +17,7 @@ var maxLine = 15;
 var isLive = true;
 var spd = 6;
 
-// var gif;
+var gif;
 
 
 // Put variables in global scope to make them available to the browser console.
@@ -68,6 +68,7 @@ function errorMsg(msg, error) {
 function readyStart(isDebug){
     video.classList.add("add");
 
+    settingGif();
     sortPosition();
 
     if(isDebug){
@@ -90,14 +91,14 @@ function readyStart(isDebug){
     var btnReset = document.querySelector(".js-btn-reset");
     btnReset.addEventListener("touchstart", reset);
 
-    // var btnGif = document.querySelector(".js-btn-save");
-    // btnGif.addEventListener("touchstart", showGif);
+    var btnGif = document.querySelector(".js-btn-save");
+    btnGif.addEventListener("touchstart", showGif);
 
 }
 
 function settingGif(){
     gif = new GIF({
-        workers: 1,
+        workers: 2,
         quality: 5
     });
 
@@ -149,12 +150,10 @@ function captureImage(){
     img.src = canvas.toDataURL();
     container.appendChild(img);
 
-    console.log(ctx.getImageData(0,0,canvas.width, canvas.height))
     // gif.addFrame(img);
     // gif.addFrame(ctx, {delay: 1, copy: true});
-    // gif.addFrame(canvas, {delay: 300});
+    // gif.addFrame(canvas, {delay: 100});
 
-    // console.log(gif)
 
 }
 
@@ -188,31 +187,27 @@ function onResize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    // console.log(document.body.offsetHeight, window.innerHeight )
+    // console.log(document.body.clientHeight, window.innerHeight )
 }
 
 
 function drawCanvas(){
     window.requestAnimationFrame(drawCanvas);
-    // onResize();
+    onResize();
 
-    if(canvas.width != video.videoWidth){
-        /*canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight*/
-    }
-
+    // console.log(video.videoWidth)
 
     timer++;
 
     if(isLive){
         // ctx.globalAlpha = 0.02
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight, 0, 0, canvas.width, canvas.width*(video.videoHeight/video.videoWidth));
+        ctx.drawImage(video, 0, 0, video.videoWidth,  video.videoHeight, 0, 0, canvas.width, canvas.width*(video.videoHeight/video.videoWidth));
     } else {
-        ctx.globalAlpha = 1;
+        // ctx.globalAlpha = 1;
 
+        var img = saveImgArr[saveImgIndex];
         if(timer % spd == 0){
-            var img = saveImgArr[saveImgIndex];
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
@@ -220,17 +215,20 @@ function drawCanvas(){
                 saveImgIndex = saveImgIndex + 1;
                 if(saveImgIndex == saveImgArr.length){
                     directSq = -1;
-                    saveImgIndex = saveImgArr.length-1;
+                    saveImgIndex = saveImgArr.length-2;
                 }
             } else {
                 saveImgIndex = saveImgIndex - 1;
                 if(saveImgIndex < 0){
                     directSq = 1;
-                    saveImgIndex = 0;
+                    saveImgIndex = 1;
                 }
             }
 
             // saveImgIndex = (saveImgIndex+1) % saveImgArr.length
+        } else {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
         }
 
 
