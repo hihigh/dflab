@@ -65,7 +65,9 @@ function errorMsg(msg, error) {
 }
 
 
-startVideo()
+navigator.mediaDevices.getUserMedia(constraints).
+then(handleSuccess).catch(handleError);
+
 function startVideo(){
     constraints.video = true;
 
@@ -103,6 +105,8 @@ function readyStart(isDebug){
     var btnGif = document.querySelector(".js-btn-save");
     btnGif.addEventListener("touchstart", showGif);
 
+    var btnReserverse = document.querySelector(".js-btn-reverse");
+    btnReserverse.addEventListener("touchstart", startVideo);
 }
 
 function settingGif(){
