@@ -65,6 +65,15 @@ function errorMsg(msg, error) {
 }
 
 
+startVideo()
+function startVideo(){
+    constraints.video = true;
+
+    navigator.mediaDevices.getUserMedia(constraints).
+    then(handleSuccess).catch(handleError);
+}
+
+
 function readyStart(isDebug){
     video.classList.add("add");
 
@@ -190,8 +199,7 @@ function sampleVideo(){
 
 }
 
-navigator.mediaDevices.getUserMedia(constraints).
-then(handleSuccess).catch(handleError);
+
 
 
 
