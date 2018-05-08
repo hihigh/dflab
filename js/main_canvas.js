@@ -167,7 +167,7 @@ function sortPosition(){
 
 
 function sampleVideo(){
-    video.setAttribute("src", "./video/test.mp4");
+    video.setAttribute("src", "./video/test_v0.mp4");
     video.load();
 
 
@@ -199,10 +199,30 @@ function drawCanvas(){
 
     timer++;
 
+    var per = (video.videoHeight/video.videoWidth);
+    var posiX = 0;
+    var posiY = 0;
+    var drawW = canvas.width;
+    var drawH = canvas.width * per;
+    if(video.videoWidth > video.videoHeight){
+        //h
+        per = (video.videoWidth/video.videoHeight);
+        drawW = canvas.height* per;
+        drawH = canvas.height;
+
+        posiX = (drawW-canvas.width)*-0.5;
+
+    } else {
+        //v
+        per = (video.videoHeight/video.videoWidth);
+        drawW = canvas.width;
+        drawH = canvas.width * per;
+    }
+
     if(isLive){
         // ctx.globalAlpha = 0.02
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(video, 0, 0, video.videoWidth,  video.videoHeight, 0, 0, canvas.width, canvas.width*(video.videoHeight/video.videoWidth));
+        ctx.drawImage(video, 0, 0, video.videoWidth,  video.videoHeight, posiX, posiY, drawW, drawH);
     } else {
         // ctx.globalAlpha = 1;
 
