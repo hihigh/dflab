@@ -104,7 +104,7 @@ function settingGif(){
 
     gif.on('finished', function(blob) {
         alert("save img")
-        window.open(URL.createObjectURL(blob));
+        window.open(URL.createObjectURL(blob), "_blank");
         document.querySelector("body").classList.remove("no-btn");
 
         reset();
