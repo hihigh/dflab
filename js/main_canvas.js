@@ -68,8 +68,14 @@ function errorMsg(msg, error) {
 navigator.mediaDevices.getUserMedia(constraints).
 then(handleSuccess).catch(handleError);
 
+var isSelf = false;
 function startVideo(){
-    constraints.video = true;
+    if(isSelf){
+        constraints.video = { facingMode: { exact: "environment" } };
+    } else {
+        constraints.video = true;
+    }
+    isSelf = !isSelf;
 
     navigator.mediaDevices.getUserMedia(constraints).
     then(handleSuccess).catch(handleError);
