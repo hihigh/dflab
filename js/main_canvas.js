@@ -177,7 +177,7 @@ function captureImage(){
     img.src = canvas.toDataURL();
     container.appendChild(img);
 
-    gif.addFrame(canvas, {delay: 10});
+    gif.addFrame(canvas, {delay: 100});
 
     /*var setImg = imgsArr[capIndex++];
     setImg.src = canvas.toDataURL();
