@@ -103,14 +103,8 @@ function settingGif(){
     });
 
     gif.on('finished', function(blob) {
-        alert("save img")
         window.open(URL.createObjectURL(blob));
-        document.querySelector("body").classList.remove("no-btn");
-
-        reset();
-        settingGif();
     });
-
 }
 
 var saveImgArr = [];
@@ -119,7 +113,7 @@ var directSq = 1;
 
 function showSq(){
     saveImgArr = document.querySelectorAll(".wrapper-capture img");
-    if(saveImgArr.length <= 1) return;
+    if(saveImgArr.length == 0) return;
 
     var con = document.querySelector(".wrapper-capture");
     con.classList.add("hidden");
@@ -131,7 +125,6 @@ function showSq(){
 function reset(){
     var con = document.querySelector(".wrapper-capture");
     con.classList.remove("hidden");
-
     con.innerHTML = "";
     saveImgArr = [];
     saveImgIndex = 0;
@@ -141,34 +134,25 @@ function reset(){
 
 
 function showGif(){
-    saveImgArr = document.querySelectorAll(".wrapper-capture img");
-    if(saveImgArr.length <= 1) return;
 
     gif.render();
-    document.querySelector("body").classList.add("no-btn");
 }
 
 
 
-function captureImage(){
 
+
+function captureImage(){
     var container = document.querySelector(".wrapper-capture");
+
     var img = document.createElement('img');
+
     img.src = canvas.toDataURL();
     container.appendChild(img);
 
-    gif.addFrame(canvas, {delay: 10});
-
-    /*var setImg = imgsArr[capIndex++];
-    setImg.src = canvas.toDataURL();
-    // gif.addFrame(canvas, {delay: 10});
-
-    // imgs.src = canvas.toDataURL();
-
-    gif.addFrame(setImg, {delay: 10});*/
-
+    // gif.addFrame(img);
     // gif.addFrame(ctx, {delay: 1, copy: true});
-
+    // gif.addFrame(canvas, {delay: 100});
 
 
 }
