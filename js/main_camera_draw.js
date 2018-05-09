@@ -26,7 +26,7 @@ var isFirst = false;
 var constraints = window.constraints = {
     audio: false,
     // video: true
-    video: { facingMode: { exact: "environment" } }
+    video: { facingMode: { exact: "user" } }
 };
 
 function handleSuccess(stream) {
