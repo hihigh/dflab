@@ -223,7 +223,8 @@ h2 {
 
 body.no-btn {pointer-events: none; opacity: 0.7}
 
-.wrap-addition { position: absolute; z-index: 10; background-color: rgba(255,255,255,0.4); width: 100%; padding: 10px}
-.btn-back {bottom:0; position: fixed; margin: 10px; color:#999999; z-index: 10}
-.title { margin: 0; }
-.description { font-size: 0.8em; }
+
+.wrapper-btn button {
+  margin: 0px 25px 15px 0px;
+
+}

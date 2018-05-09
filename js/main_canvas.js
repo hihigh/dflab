@@ -38,9 +38,6 @@ function handleSuccess(stream) {
     video.srcObject = stream;
 
     readyStart();
-
-
-
 }
 
 function handleError(error) {
