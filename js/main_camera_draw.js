@@ -19,6 +19,8 @@ var spd = 6;
 
 var gif;
 
+var isFirst = false;
+
 
 // Put variables in global scope to make them available to the browser console.
 var constraints = window.constraints = {
@@ -295,79 +297,6 @@ function drawCanvas(){
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function drawCanvas_zigzag(){
-    window.requestAnimationFrame(drawCanvas);
-
-    timer++;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // ctx.drawImage(video, 0, 0, video.videoWidth,  video.videoHeight, 0, 0, canvas.width, canvas.height);
-
-
-    var particleNum = maxLine;
-
-    var per = 0.3;
-    var particleH = Math.ceil(canvas.height / particleNum);
-    var ran = 0;
-    var ran_gap = 20;
-
-
-
-    for (var i = 0; i < particleNum; i++) {
-        ran = ran_gap;
-
-        if(i%2){
-            ctx.drawImage(video,
-                0, (video.videoHeight/particleNum)*i, video.videoWidth,  video.videoHeight/particleNum,
-                0, (canvas.height/particleNum)*randomHArr[i], canvas.width, canvas.height/particleNum);
-        } else {
-            ctx.drawImage(video,
-                0, (video.videoHeight/particleNum)*i, video.videoWidth,  video.videoHeight/particleNum,
-                -0, (canvas.height/particleNum)*randomHArr[i], canvas.width, canvas.height/particleNum);
-            // ctx.drawImage(video, 0, 0, video.videoWidth,  video.videoHeight, 0, 0, canvas.width, canvas.height);
-        }
-    }
-
-
-
-
-    // if ( segment ) { segment.update() }
-    // if ( texture ) { texture.update(); }
-
-    // renderer.render(stage);
-
-
-}
-
-
-
-
 
 
 

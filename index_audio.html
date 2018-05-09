@@ -19,39 +19,35 @@
     <link rel="stylesheet" href="css/main.css">
     <!--<link rel="stylesheet" href="css/base.css">-->
 
+    <style>
+        #container p{
+            color: #ffffff;
+        }
+        .value {
+            margin-top: 50px;
+            font-size: 2em;
+        }
+        #instant {margin-top: 250px}
+    </style>
 
 </head>
 
 <body>
 
 <div id="container">
-    <canvas id="draw-canvas" class="filter-video" width="0" height="0"></canvas>
+    <div id="instant"><p class="value">000</p></div>
+    <div id="slow"><p class="value">000</p></div>
+    <div id="clip"><p class="value">000</p></div>
 </div>
 
 
-<div class="wrapper-video">
-    <!--<h2>video</h2>-->
-    <video id="gum-local" autoplay playsinline loop></video>
-</div>
-
-<div class="wrapper-capture">
-</div>
-
-<div class="wrapper-btn">
-    <a href="./index_audio.html">ddddddd</a>
-    <button class="js-btn-reverse">reverse</button>
-    <button class="js-btn-show">show</button>
-    <button class="js-btn-reset">reset</button>
-    <button class="js-btn-save" style="display: none">gif</button>
-    <!--<button class="js-btn-save">save</button>-->
-</div>
 
 <!-- Frame UI -->
 <div class="frame-ui">
     <div class="wrap-txt">
-        <h1 class="title">WebRTC - camera</h1>
-        <p class="description"><span>카메라로 찍은 사진을 정방향 역방향으로 연결시켜 반복</span></p>
-        <p class="manual"><span>Click to stage : capture photo<br>reverse : rotate camera<br>show : show image<br>reset : retry</span></p>
+        <h1 class="title">WebRTC - audio</h1>
+        <p class="description"><span>volume</span></p>
+        <p class="manual"><span>Click to stage : capture photo</span></p>
     </div>
     <button class="btn-expend"><i class="material-icons">expand_less</i><span class="blind">Expend Less</span></button>
     <button class="btn-back" data-path=""><i class="material-icons">arrow_back</i><span class="blind">Back</span></button>
@@ -61,9 +57,8 @@
 
 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
 
-<script src="js/gif.js"></script>
-<script src="js/gif.worker.js"></script>
-<script src="js/main_canvas.js"></script>
+<script src="js/soundmeter.js"></script>
+<script src="js/main_audio.js"></script>
 
 
 </body>
