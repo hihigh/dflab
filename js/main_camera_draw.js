@@ -39,7 +39,12 @@ function handleSuccess(stream) {
     window.stream = stream; // make variable available to browser console
     video.srcObject = stream;
 
-    readyStart();
+    if(isFirst){
+        readyStart();
+        isFirst = true;
+    }
+
+
 }
 
 function handleError(error) {
