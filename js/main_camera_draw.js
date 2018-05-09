@@ -72,7 +72,7 @@ function startVideo(){
     if(isSelf){
         constraints.video = { facingMode: { exact: "environment" } };
     } else {
-        constraints.video = true;
+        constraints.video = { facingMode: { exact: "user" } };
     }
     isSelf = !isSelf;
 
@@ -84,34 +84,39 @@ function startVideo(){
 function readyStart(isDebug){
     video.classList.add("add");
 
-    settingGif();
-    sortPosition();
+    // settingGif();
+    // sortPosition();
+
+    if(!isDrawing){
+        var container = document.querySelector("#container");
+        container.addEventListener("touchstart", captureImage);
+
+        var btnShow = document.querySelector(".js-btn-show");
+        btnShow.addEventListener("touchstart", showSq);
+
+        var btnReset = document.querySelector(".js-btn-reset");
+        btnReset.addEventListener("touchstart", reset);
+
+        var btnGif = document.querySelector(".js-btn-save");
+        btnGif.addEventListener("touchstart", showGif);
+
+        var btnReserverse = document.querySelector(".js-btn-reverse");
+        btnReserverse.addEventListener("touchstart", startVideo);
+    }
 
     if(isDebug){
         sampleVideo();
         onResize();
-        drawCanvas();
+        if(!isDrawing) drawCanvas();
     } else {
         onResize();
-        drawCanvas();
+        if(!isDrawing) drawCanvas();
     }
 
     // window.addEventListener("click", sortPosition)
 
-    var container = document.querySelector("#container");
-    container.addEventListener("touchstart", captureImage);
 
-    var btnShow = document.querySelector(".js-btn-show");
-    btnShow.addEventListener("touchstart", showSq);
 
-    var btnReset = document.querySelector(".js-btn-reset");
-    btnReset.addEventListener("touchstart", reset);
-
-    var btnGif = document.querySelector(".js-btn-save");
-    btnGif.addEventListener("touchstart", showGif);
-
-    var btnReserverse = document.querySelector(".js-btn-reverse");
-    btnReserverse.addEventListener("touchstart", startVideo);
 }
 
 function settingGif(){
@@ -224,10 +229,12 @@ function onResize() {
     // console.log(document.body.clientHeight, window.innerHeight )
 }
 
-
+var isDrawing = false;
 function drawCanvas(){
     window.requestAnimationFrame(drawCanvas);
     onResize();
+
+    isDrawing = true;
 
     // console.log(video.videoWidth)
 
