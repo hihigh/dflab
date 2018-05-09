@@ -20,6 +20,7 @@ var slowValueDisplay = document.querySelector('#slow .value');
 var clipValueDisplay = document.querySelector('#clip .value');*/
 
 var instantValueDisplay = document.querySelector('#instant .value');
+var debug = document.querySelector('#debug .value');
 var slowValueDisplay = document.querySelector('#slow .value');
 var clipValueDisplay = document.querySelector('#clip .value');
 
@@ -49,6 +50,7 @@ function handleSuccess(stream) {
 
         setInterval(function() {
             instantValueDisplay.innerHTML = soundMeter.instant.toFixed(2);
+            debug.innerHTML = soundMeter.instant.toFixed(2);
             /*slowValueDisplay.innerHTML = soundMeter.slow.toFixed(2);
             clipValueDisplay.innerHTML = soundMeter.clip;*/
 

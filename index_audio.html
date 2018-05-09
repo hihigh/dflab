@@ -23,7 +23,7 @@
         #container p{
             color: #ffffff;
         }
-        .value {
+        #instant .value {
             font-size: 200px;
             line-height: 90vh;
             width: 100%;
@@ -44,6 +44,12 @@
             background: #42b983;
             /*transform: rotate(10deg);*/
         }
+
+        #debug {
+            position: absolute;
+            height: 100vh;
+            z-index: 10;
+        }
     </style>
 
 </head>
@@ -51,6 +57,7 @@
 <body>
 
 <div id="container">
+    <div id="debug"><p class="value">00000</p></div>
     <div id="instant"><p class="value">0</p></div>
     <div class="rotate-obj"></div>
 </div>
