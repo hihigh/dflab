@@ -23,8 +23,8 @@ var gif;
 // Put variables in global scope to make them available to the browser console.
 var constraints = window.constraints = {
     audio: false,
-    video: true
-    // video: { facingMode: { exact: "environment" } }
+    // video: true
+    video: { facingMode: { exact: "environment" } }
 };
 
 function handleSuccess(stream) {
@@ -38,9 +38,6 @@ function handleSuccess(stream) {
     video.srcObject = stream;
 
     readyStart();
-
-
-
 }
 
 function handleError(error) {
@@ -62,6 +59,23 @@ function errorMsg(msg, error) {
     if (typeof error !== 'undefined') {
         console.error(error);
     }
+}
+
+
+navigator.mediaDevices.getUserMedia(constraints).
+then(handleSuccess).catch(handleError);
+
+var isSelf = false;
+function startVideo(){
+    if(isSelf){
+        constraints.video = { facingMode: { exact: "environment" } };
+    } else {
+        constraints.video = true;
+    }
+    isSelf = !isSelf;
+
+    navigator.mediaDevices.getUserMedia(constraints).
+    then(handleSuccess).catch(handleError);
 }
 
 
@@ -94,6 +108,8 @@ function readyStart(isDebug){
     var btnGif = document.querySelector(".js-btn-save");
     btnGif.addEventListener("touchstart", showGif);
 
+    var btnReserverse = document.querySelector(".js-btn-reverse");
+    btnReserverse.addEventListener("touchstart", startVideo);
 }
 
 function settingGif(){
@@ -103,8 +119,15 @@ function settingGif(){
     });
 
     gif.on('finished', function(blob) {
-        window.open(URL.createObjectURL(blob));
+        alert("save img")
+
+        window.open(URL.createObjectURL(blob), "_blank");
+        document.querySelector("body").classList.remove("no-btn");
+
+        // reset();
+        // settingGif();
     });
+
 }
 
 var saveImgArr = [];
@@ -113,7 +136,7 @@ var directSq = 1;
 
 function showSq(){
     saveImgArr = document.querySelectorAll(".wrapper-capture img");
-    if(saveImgArr.length == 0) return;
+    if(saveImgArr.length <= 1) return;
 
     var con = document.querySelector(".wrapper-capture");
     con.classList.add("hidden");
@@ -125,6 +148,7 @@ function showSq(){
 function reset(){
     var con = document.querySelector(".wrapper-capture");
     con.classList.remove("hidden");
+
     con.innerHTML = "";
     saveImgArr = [];
     saveImgIndex = 0;
@@ -134,25 +158,34 @@ function reset(){
 
 
 function showGif(){
+    saveImgArr = document.querySelectorAll(".wrapper-capture img");
+    if(saveImgArr.length <= 1) return;
 
     gif.render();
+    document.querySelector("body").classList.add("no-btn");
 }
 
 
 
-
-
 function captureImage(){
+
     var container = document.querySelector(".wrapper-capture");
-
     var img = document.createElement('img');
-
     img.src = canvas.toDataURL();
     container.appendChild(img);
 
-    // gif.addFrame(img);
+    gif.addFrame(canvas, {delay: 100});
+
+    /*var setImg = imgsArr[capIndex++];
+    setImg.src = canvas.toDataURL();
+    // gif.addFrame(canvas, {delay: 10});
+
+    // imgs.src = canvas.toDataURL();
+
+    gif.addFrame(setImg, {delay: 10});*/
+
     // gif.addFrame(ctx, {delay: 1, copy: true});
-    // gif.addFrame(canvas, {delay: 100});
+
 
 
 }
@@ -173,8 +206,7 @@ function sampleVideo(){
 
 }
 
-navigator.mediaDevices.getUserMedia(constraints).
-then(handleSuccess).catch(handleError);
+
 
 
 
