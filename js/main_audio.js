@@ -49,10 +49,10 @@ function handleSuccess(stream) {
 
         setInterval(function() {
             instantValueDisplay.innerHTML = soundMeter.instant.toFixed(2);
-            slowValueDisplay.innerHTML = soundMeter.slow.toFixed(2);
-            clipValueDisplay.innerHTML = soundMeter.clip;
+            /*slowValueDisplay.innerHTML = soundMeter.slow.toFixed(2);
+            clipValueDisplay.innerHTML = soundMeter.clip;*/
 
-            pow += soundMeter.instant.toFixed(2) * 100;
+            pow += soundMeter.instant.toFixed(2) * 50;
         }, 200);
     });
 }
@@ -69,25 +69,28 @@ console.log(document.querySelector(".rotate-obj"))
 
 
 document.addEventListener("touchstart", function(e){
-    console.log("dfsfdf")
-    pow += 5;
-
+    pow += 2;
 });
 
 
 var rotateObj = document.querySelector(".rotate-obj");
 var degreNum = 0;
 var spd = 0.2;
-var pow = 20;
+var pow = 10;
 function update() {
     requestAnimationFrame(update);
 
-    pow = pow * 0.98;
+    if(pow < 0.0001) {
+        pow = 0;
+    } else {
+        pow = pow * 0.99;
+    }
 
     degreNum = degreNum + (spd + pow);
 
     rotateObj.style.transform="rotate("+degreNum+"deg)";
 
+    instantValueDisplay.innerHTML = parseInt(pow * 10);
 }
 
 
