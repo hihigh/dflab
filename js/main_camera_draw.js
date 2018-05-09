@@ -25,7 +25,6 @@ var isFirst = false;
 // Put variables in global scope to make them available to the browser console.
 var constraints = window.constraints = {
     audio: false,
-    // video: true
     video: { facingMode: { exact: "environment" } }
 };
 
@@ -77,8 +76,9 @@ function startVideo(){
     if(isSelf){
         constraints.video = { facingMode: { exact: "environment" } };
     } else {
-        constraints.video = true;
+        constraints.video = { facingMode: { exact: "user" } };
     }
+
     isSelf = !isSelf;
 
     navigator.mediaDevices.getUserMedia(constraints).
