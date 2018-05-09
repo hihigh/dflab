@@ -52,7 +52,7 @@ function handleSuccess(stream) {
             /*slowValueDisplay.innerHTML = soundMeter.slow.toFixed(2);
             clipValueDisplay.innerHTML = soundMeter.clip;*/
 
-            pow += soundMeter.instant.toFixed(2) * 30;
+            pow += soundMeter.instant.toFixed(2) * 50;
         }, 200);
     });
 }
