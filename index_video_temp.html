@@ -20,21 +20,26 @@
 </head>
 
 <style>
+
     .wrapper-video {
-        position: absolute;
+        position: fixed;
+
+        background-color: #000;
         width: 100%;
     }
-    .wrapper-video video{
+
+    video {
+        background: #222;
         width: 100%;
     }
 
 </style>
 
 <body>
-
+<!--
 <div id="container">
     <canvas id="draw-canvas" class="filter-video" width="0" height="0"></canvas>
-</div>
+</div>-->
 
 
 <div class="wrapper-video">
@@ -88,8 +93,6 @@
                 'order for the demo to work.');
         }
         errorMsg('getUserMedia error: ' + error.name, error);
-
-        readyStart(true);
     }
 
     function errorMsg(msg, error) {
