@@ -23,7 +23,6 @@
 
     .wrapper-video {
         position: fixed;
-
         background-color: #000;
         width: 100%;
     }
@@ -33,16 +32,24 @@
         width: 100%;
     }
 
+    .btn-camera {width: 50%; height: 100%; margin: 40px 0 0px 0; float: left; line-height: 80vh}
+
+    .hide {display: none}
+
+
 </style>
 
 <body>
+
+<button class="btn-front btn-camera">environment camera</button>
+<button class="btn-back btn-camera">user camera</button>
 <!--
 <div id="container">
     <canvas id="draw-canvas" class="filter-video" width="0" height="0"></canvas>
 </div>-->
 
 
-<div class="wrapper-video">
+<div class="wrapper-video hide">
     <video id="gum-local" autoplay playsinline loop></video>
 </div>
 
@@ -66,8 +73,48 @@
 
 <script>
     var video = document.querySelector('video');
+    var video_wrap = document.querySelector('.wrapper-video');
+
+    var front = document.querySelector(".btn-front");
+    var back = document.querySelector(".btn-back");
+
+    front.addEventListener("click", function(){ showFrontCamera(); });
+    back.addEventListener("click", function(){ showBackCamera(); });
+
+
+    function showFrontCamera(){
+        front.classList.add("hide");
+        back.classList.add("hide");
+        video_wrap.classList.remove("hide");
+
+        navigator.mediaDevices.getUserMedia(constraints_front).
+        then(handleSuccess).catch(handleError);
+    }
+
+    function showBackCamera(){
+        front.classList.add("hide");
+        back.classList.add("hide");
+        video_wrap.classList.remove("hide");
+
+        navigator.mediaDevices.getUserMedia(constraints_back).
+        then(handleSuccess).catch(handleError);
+    }
+
+
+
+
+
+
+
+
     // Put variables in global scope to make them available to the browser console.
-    var constraints = window.constraints = {
+    var constraints_front = window.constraints = {
+        audio: false,
+        // video: true
+        video: { facingMode: { exact: "user" } }
+    };
+
+    var constraints_back = window.constraints = {
         audio: false,
         // video: true
         video: { facingMode: { exact: "environment" } }
@@ -104,8 +151,7 @@
     }
 
 
-    navigator.mediaDevices.getUserMedia(constraints).
-    then(handleSuccess).catch(handleError);
+
 </script>
 
 </body>
