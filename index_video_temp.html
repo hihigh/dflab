@@ -87,8 +87,7 @@
         back.classList.add("hide");
         video_wrap.classList.remove("hide");
 
-        navigator.mediaDevices.getUserMedia(constraints_front).
-        then(handleSuccess).catch(handleError);
+        startVideo(constraints_front);
     }
 
     function showBackCamera(){
@@ -96,10 +95,15 @@
         back.classList.add("hide");
         video_wrap.classList.remove("hide");
 
-        navigator.mediaDevices.getUserMedia(constraints_back).
-        then(handleSuccess).catch(handleError);
+        startVideo(constraints_back);
     }
 
+
+
+    function startVideo(constraints){
+        navigator.mediaDevices.getUserMedia(constraints).
+        then(handleSuccess).catch(handleError);
+    }
 
 
 
