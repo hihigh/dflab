@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- viewport for mobile device / REF : http://aboooks.tistory.com/352 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>webRTC - camera</title>
+
+    <!-- PWA -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="http://dev.designfever.com/lab/manifest.json">
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/frame.css">
+    <!--<link rel="stylesheet" href="css/main.css">-->
+</head>
+
+<style>
+
+    .wrapper-video {
+        position: fixed;
+        background-color: #000;
+        width: 100%;
+    }
+
+    video {
+        background: #222;
+        width: 100%;
+    }
+
+    .btn-camera {width: 50%; height: 100%; margin: 40px 0 0px 0; float: left; line-height: 80vh}
+
+    .hide {display: none}
+
+
+</style>
+
+<body>
+
+<button class="btn-front btn-camera">user camera</button>
+<button class="btn-back btn-camera">environment camera</button>
+<!--
+<div id="container">
+    <canvas id="draw-canvas" class="filter-video" width="0" height="0"></canvas>
+</div>-->
+
+
+<div class="wrapper-video hide">
+    <video id="gum-local" autoplay playsinline loop></video>
+</div>
+
+<!-- Frame UI -->
+<div class="frame-ui">
+    <!--<div class="wrap-txt">
+        <h1 class="title">WebRTC - camera</h1>
+        <p class="description"><span>카메라로 찍은 사진을 정방향 역방향으로 연결시켜 반복</span></p>
+        <p class="manual"><span>Click to stage : capture photo<br>reverse : reverse camera (ios only)<br>show : show image<br>reset : retry</span></p>
+    </div>
+    <button class="btn-expend"><i class="material-icons">expand_less</i><span class="blind">Expend Less</span></button>-->
+    <button class="btn-back" data-path="http://dev.designfever.com/lab/"><i class="material-icons">arrow_back</i><span class="blind">Back</span></button>
+    <!--http://dev.designfever.com/lab/contents/just-fun/-->
+</div>
+
+
+<script src="js/common.bundle.js"></script>
+<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+
+
+
+<script>
+    var video = document.querySelector('video');
+    var video_wrap = document.querySelector('.wrapper-video');
+
+    var front = document.querySelector(".btn-front");
+    var back = document.querySelector(".btn-back");
+
+    front.addEventListener("click", function(){ showFrontCamera(); });
+    back.addEventListener("click", function(){ showBackCamera(); });
+
+
+    function showFrontCamera(){
+        front.classList.add("hide");
+        back.classList.add("hide");
+        video_wrap.classList.remove("hide");
+
+        startVideo(constraints_front);
+    }
+
+    function showBackCamera(){
+        front.classList.add("hide");
+        back.classList.add("hide");
+        video_wrap.classList.remove("hide");
+
+        startVideo(constraints_back);
+    }
+
+
+
+    function startVideo(constraints){
+        navigator.mediaDevices.getUserMedia(constraints).
+        then(handleSuccess).catch(handleError);
+    }
+
+
+
+
+
+
+
+    // Put variables in global scope to make them available to the browser console.
+    var constraints_front = window.constraints = {
+        audio: false,
+        // video: true
+        video: { facingMode: { exact: "user" } }
+    };
+
+    var constraints_back = window.constraints = {
+        audio: false,
+        // video: true
+        video: { facingMode: { exact: "environment" } }
+    };
+
+    function handleSuccess(stream) {
+        var videoTracks = stream.getVideoTracks();
+        console.log('Got stream with constraints:', constraints);
+        console.log('Using video device: ' + videoTracks[0].label);
+        stream.oninactive = function() {
+            console.log('Stream inactive');
+        };
+        window.stream = stream; // make variable available to browser console
+        video.srcObject = stream;
+    }
+
+    function handleError(error) {
+        if (error.name === 'ConstraintNotSatisfiedError') {
+            errorMsg('The resolution ' + constraints.video.width.exact + 'x' +
+                constraints.video.width.exact + ' px is not supported by your device.');
+        } else if (error.name === 'PermissionDeniedError') {
+            errorMsg('Permissions have not been granted to use your camera and ' +
+                'microphone, you need to allow the page access to your devices in ' +
+                'order for the demo to work.');
+        }
+        errorMsg('getUserMedia error: ' + error.name, error);
+    }
+
+    function errorMsg(msg, error) {
+        // errorElement.innerHTML += '<p>' + msg + '</p>';
+        if (typeof error !== 'undefined') {
+            console.error(error);
+        }
+    }
+
+
+
+</script>
+
+</body>
+</html>
+
+
