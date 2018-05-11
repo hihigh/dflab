@@ -146,7 +146,7 @@ function showSq(){
     if(saveImgArr.length <= 1) return;
 
     var con = document.querySelector(".wrapper-capture");
-    con.classList.add("hidden");
+    // con.classList.add("hidden");
 
     isLive = false;
 
@@ -268,7 +268,10 @@ function drawCanvas(){
         // ctx.globalAlpha = 1;
 
         var img = saveImgArr[saveImgIndex];
+
         if(timer % spd == 0){
+            saveImgArr[saveImgIndex].classList.remove("show");
+
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
@@ -286,11 +289,15 @@ function drawCanvas(){
                 }
             }
 
+            console.log(saveImgIndex)
+            saveImgArr[saveImgIndex].classList.add("show");
             // saveImgIndex = (saveImgIndex+1) % saveImgArr.length
         } else {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
         }
+
+        // img.classList.add("show")
 
 
 
