@@ -14,41 +14,64 @@
     <link rel="manifest" href="http://dev.designfever.com/lab/manifest.json">
 
 
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/base.css">
+
+    <style>
+        body {background: 0; width: 100%; height:100%; overflow: hidden}
+        main {width: 100%; height:100%}
+        .content {width: 100%; height:100%; position: fixed;}
 
 
+    </style>
 </head>
 
 <body>
 
-<div id="container">
 
-    <div id="root">
-        <h2>pixi</h2>
-    </div>
-
-    <div>
-        <h2>canvas default</h2>
-        <canvas id="draw-canvas" width="0" height="0"></canvas>
-    </div>
-
-
-
-
-    <!--<div id="errorMsg"></div>-->
-
-
-</div>
-
-<div class="wrapper-video">
-    <!--<h2>video</h2>-->
-    <video id="gum-local" autoplay playsinline></video>
-</div>
+<main class="site-wrapper">
+    <video id="gum-local" autoplay playsinline loop></video>
+    <div class="content" id="obj_stage"></div>
+</main>
 
 <script type="text/javascript" src="js/common_withPixi.bundle.js"></script>
 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-<script src="js/main_canvas.js"></script>
+<script src="js/main_pixi.js"></script>
+
+<script>
+
+    var arr_canvas = [];
+    var obj_stage = document.getElementById("obj_stage");
+
+    var filter = new FilterImage({
+        container:obj_stage,
+        stageWidth:obj_stage.offsetWidth,
+        stageHeight:obj_stage.offsetHeight
+    }, 0.5);
+    filter.init();
+    arr_canvas.push(filter);
+
+    var oW = obj_stage.offsetWidth, oH=obj_stage.offsetHeight;
+    var ID_timeout = 0;
+
+    window.onresize = function(event) {
+        console.log(obj_stage.offsetWidth, oH=obj_stage.offsetHeight);
+        checkSize();
+    };
+
+    window.addEventListener("orientationchange", function() {
+        clearTimeout(ID_timeout);
+        ID_timeout = setTimeout(checkSize, 1000);
+    }, false);
+
+    function checkSize(){
+        if(oW != obj_stage.offsetWidth ||oH != obj_stage.offsetHeight) {
+            oW = obj_stage.offsetWidth;
+            oH = obj_stage.offsetHeight;
+            filter.resetSize(obj_stage.offsetWidth, obj_stage.offsetHeight);
+        }
+    }
+
+
+</script>
 
 
 </body>
