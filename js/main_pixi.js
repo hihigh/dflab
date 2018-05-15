@@ -166,6 +166,7 @@ FilterImage.prototype = {
 
         this.resetValue();
 
+        console.log(this.options)
     },
 
     resetValue : function(){
@@ -195,26 +196,25 @@ class ImageThumb extends PIXI.Sprite {
     setting(video){
 
         this.settingFilters();
-        this.settingScene(video);
 
-        this.filters = [this.filtersArr[0]];
 
-        this.interactive = true;
-        this.buttonMode = true;
-    }
-
-    settingScene(video){
         this.texture = PIXI.Texture.fromVideo(video);
 
-        var ratio = window.devicePixelRatio;
-        var oriW = filterPixi.options.stageWidth * ratio;
-        var oriH = filterPixi.options.stageHeight * ratio;
+        var per = (filterPixi.options.stageHeight * window.devicePixelRatio) / video.videoHeight;
 
-        var per = oriH / video.videoHeight;
-
-        this.height = oriH;
+        this.height = filterPixi.options.stageHeight * window.devicePixelRatio;
         this.width = video.videoWidth * per;
-        // this.x = -(this.width - (oriW*ratio)) * 0.5;
+
+        this.x = 0
+
+        console.log(this.width, this.height)
+
+        /*var per = (filterPixi.options.stageWidth * window.devicePixelRatio) / video.videoWidth;
+
+        this.width = filterPixi.options.stageWidth * window.devicePixelRatio;
+        this.height = video.videoHeight * per;*/
+
+        this.filters = [this.filtersArr[2]];
     }
 
     settingFilters(){
