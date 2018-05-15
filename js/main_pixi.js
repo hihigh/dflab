@@ -90,25 +90,22 @@ var FilterImage = function(args){
     var saveImage = function(){
 
 
-        var url = filterPixi.saveImage();
+        /*var url = filterPixi.saveImage();
 
         var img = document.createElement('img');
         img.src = url;
 
         var wrap = document.querySelector(".wrap-capture");
-        wrap.appendChild(img);
+        wrap.appendChild(img);*/
 
-/*
 
         var canvas = document.querySelector(".content canvas");
 
         var img = document.createElement('img');
         img.src = canvas.toDataURL();
 
-        var wrap = document.querySelector(".site-wrapper");
+        var wrap = document.querySelector(".wrap-capture");
         wrap.appendChild(img);
-
-        console.log( filterPixi.saveImage() )*/
 
     }
 
