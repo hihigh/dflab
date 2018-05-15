@@ -213,7 +213,7 @@ class ImageThumb extends PIXI.Sprite {
         this.width = filterPixi.options.stageWidth * window.devicePixelRatio;
         this.height = video.videoHeight * per;*/
 
-        this.filters = [this.filtersArr[2]];
+        this.filters = [this.filtersArr[0]];
     }
 
     settingFilters(){
