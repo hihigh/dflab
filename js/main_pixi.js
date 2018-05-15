@@ -200,6 +200,12 @@ class ImageThumb extends PIXI.Sprite {
 
         this.texture = PIXI.Texture.fromVideo(video);
 
+        var per = (filterPixi.options.stageHeight) / video.videoHeight;
+
+        this.height = filterPixi.options.stageHeight;
+        this.width = video.videoWidth * per;
+
+
         /*var ratio = 1;
 
         var per = (filterPixi.options.stageHeight * ratio) / video.videoHeight;
