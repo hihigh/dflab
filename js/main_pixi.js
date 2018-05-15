@@ -105,6 +105,12 @@ var FilterImage = function(args){
         var wrap = document.querySelector(".wrap-capture");
         wrap.appendChild(img);
 
+        var image = new Image();
+        image.src = canvas.toDataURL();;
+
+        var w = window.open("");
+        w.document.write(image.outerHTML);
+
     }
 
 };
