@@ -232,13 +232,19 @@ class ImageThumb extends PIXI.Sprite {
 
         this.filtersArr.push("");
 
+
+        filter = new PIXI.filters.ConvolutionFilter();
+        filter.width = 1;
+        filter.height = 10;
+        this.filtersArr.push(filter);
+
         filter = new PIXI.filters.PixelateFilter();
         filter.size.x = 5;
         filter.size.y = 5;
         this.filtersArr.push(filter);
 
         filter = new PIXI.filters.DotFilter();
-        filter.scale = 0.2;
+        filter.scale = 0.;
         this.filtersArr.push(filter);
 
         filter = new PIXI.filters.RGBSplitFilter();
@@ -260,11 +266,7 @@ class ImageThumb extends PIXI.Sprite {
         filter = new PIXI.filters.CrossHatchFilter();
         this.filtersArr.push(filter);
 
-        filter = new PIXI.filters.ColorReplaceFilter();
-        filter.originalColor = "0xff0000"
-        filter.newColor = "0x000000";
-        filter.epsilon = 0.5;
-        this.filtersArr.push(filter);
+
     }
 
     init(){
