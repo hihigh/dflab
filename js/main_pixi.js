@@ -1,12 +1,17 @@
 var FilterImage = function(args){
 
-    console.log("=================================")
-
     var opts = args || {};
     var _this = this;
 
     var renderNum = 0;
     var image_thumb;
+
+    var video = document.querySelector('#gum-local');
+    var constraints = window.constraints = {
+        audio: false,
+        // video: true
+        video: { facingMode: { exact: "user" } }
+    };
 
     this.setting(opts);
     this.setLayout();
@@ -15,18 +20,9 @@ var FilterImage = function(args){
         _this.addToStage();
         addEvent();
         checkVideoSrc();
-
-        /*drawCanvas();
-        setSprite();*/
     };
 
 
-    var video = document.querySelector('#gum-local');
-    var constraints = window.constraints = {
-        audio: false,
-        // video: true
-        video: { facingMode: { exact: "environment" } }
-    };
 
     var checkVideoSrc = function(){
 
@@ -45,7 +41,7 @@ var FilterImage = function(args){
         window.stream = stream; // make variable available to browser console
         video.srcObject = stream;
 
-        setSprite(stream);
+        startVideoPlay();
     };
 
     var handleError = function(error) {
@@ -53,12 +49,18 @@ var FilterImage = function(args){
         var url = "./video/test_v0.mp4";
         video.src = url;
 
-        setSprite(video);
+        startVideoPlay();
+    };
+
+    var startVideoPlay = function(){
+        video.onloadedmetadata = function() {
+            setSprite();
+        };
     };
 
 
-    var setSprite = function(url){
-        var image_thumb = new ImageThumb(url);
+    var setSprite = function(){
+        var image_thumb = new ImageThumb(video);
         image_thumb.init();
         _this.pixi.mainContainer.addChild(image_thumb);
     };
@@ -69,6 +71,7 @@ var FilterImage = function(args){
         _this.pixi.render.add(function( dleta ) {
             renderNum++;
             if(image_thumb) image_thumb.render();
+
 
         });
     };
@@ -162,6 +165,8 @@ FilterImage.prototype = {
         this.pixi.app.renderer.resize(this.options.stageWidth, this.options.stageHeight);   // * PIXI.settings.RESOLUTION)
 
         this.resetValue();
+
+        console.log(this.options)
     },
 
     resetValue : function(){
@@ -183,12 +188,45 @@ FilterImage.prototype = {
 * image Thumbnail
 * */
 class ImageThumb extends PIXI.Sprite {
-    constructor(url){
+    constructor(video){
         super();
-        this.setting(url);
+        this.setting(video);
     }
 
-    setting(url){
+    setting(video){
+
+        var filter;
+        this.filtersArr = [];
+
+        filter = new PIXI.filters.AsciiFilter();
+        this.filtersArr.push(filter);
+
+        filter = new PIXI.filters.CrossHatchFilter();
+        this.filtersArr.push(filter);
+
+        filter = new PIXI.filters.DotFilter();
+        this.filtersArr.push(filter);
+
+        filter = new PIXI.filters.OldFilmFilter();
+        this.filtersArr.push(filter);
+
+        filter = new PIXI.filters.PixelateFilter();
+        this.filtersArr.push(filter);
+
+        filter = new PIXI.filters.RGBSplitFilter();
+        this.filtersArr.push(filter);
+
+        var colorMatrix =  [
+            1,0,0,0,
+            0,1,0,0,
+            0,0,1,0,
+            0,0,0,1
+        ];
+        filter = new PIXI.filters.ColorMatrixFilter();
+        filter.matrix = colorMatrix;
+        this.filtersArr.push(filter);
+
+
         // area dummy
         var graphics = new PIXI.Graphics();
         graphics.lineStyle(1, 0xFF0000, 1);
@@ -196,18 +234,29 @@ class ImageThumb extends PIXI.Sprite {
         graphics.drawRect(0,0,window.innerWidth/2,window.innerHeight/2);
         // this.addChild(graphics);
 
-        var video = document.querySelector('#gum-local');
+
         this.texture = PIXI.Texture.fromVideo(video);
+        console.log(filterPixi.options.stageWidth, video.videoWidth / this.width, video.videoWidth , this.width)
+        // this.scale = 50
+        this.width = video.videoWidth;
+        this.height = video.videoHeight;
+
+        //window.devicePixelRatio
+
+        // console.log(this.texture)
+
+
+
+
 
         // var filter = new PIXI.filters.AsciiFilter();
         // var filter = new PIXI.filters.CrossHatchFilter();
-        var filter = new PIXI.filters.DotFilter();
+        // var filter = new PIXI.filters.DotFilter();
         // var filter = new PIXI.filters.OldFilmFilter();
         // var filter = new PIXI.filters.PixelateFilter();
         // var filter = new PIXI.filters.RGBSplitFilter();
-        // var filter = new PIXI.filters.ZoomBlurFilter();
-
-
+        /*var filter = new PIXI.filters.ColorMatrixFilter();
+        filter.matrix = colorMatrix;*/
         this.filters = [filter];
     }
 

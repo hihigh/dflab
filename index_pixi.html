@@ -19,22 +19,28 @@
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/frame.css">
     <style>
+
+        .frame-ui {display: none;}
+        #gum-local {position:fixed; width: 100px; bottom: 0; right: 0; z-index: 10}
+
         body {background: 0; width: 100%; height:100%; overflow: hidden}
         main {width: 100%; height:100%}
-        .frame-ui {display: none;}
+        .content {width: 100%; height:100%; position: fixed;}
 
+        *:not(input):not(textarea) {
+            -webkit-user-select: none; /* disable selection/Copy of UIWebView */
+            -webkit-touch-callout: none; /* disable the IOS popup when long-press on a link */
+        }
 
-        .title-txt {color: #ffffff; margin: 20px 0 10px}
-        #gum-local {width: 100%}
-        #obj_stage {width: 100%; height: 200px;}
+        .frame-ui .wrap-txt {background: rgba(0,0,0,0.2) }
 
     </style>
 
 <body>
+
+<video id="gum-local" autoplay playsinline loop></video>
+
 <main class="site-wrapper">
-    <p class="title-txt">Video</p>
-    <video id="gum-local" autoplay playsinline loop></video>
-    <p class="title-txt">canvas - PIXI</p>
     <div class="content" id="obj_stage"></div>
 </main>
 
@@ -49,13 +55,13 @@
     var arr_canvas = [];
     var obj_stage = document.getElementById("obj_stage");
 
-    var filter = new FilterImage({
+    var filterPixi = new FilterImage({
         container:obj_stage,
         stageWidth:obj_stage.offsetWidth,
         stageHeight:obj_stage.offsetHeight
     }, 0.5);
-    filter.init();
-    arr_canvas.push(filter);
+    filterPixi.init();
+    arr_canvas.push(filterPixi);
 
     var oW = obj_stage.offsetWidth, oH=obj_stage.offsetHeight;
     var ID_timeout = 0;
@@ -74,7 +80,7 @@
         if(oW != obj_stage.offsetWidth ||oH != obj_stage.offsetHeight) {
             oW = obj_stage.offsetWidth;
             oH = obj_stage.offsetHeight;
-            filter.resetSize(obj_stage.offsetWidth, obj_stage.offsetHeight);
+            filterPixi.resetSize(obj_stage.offsetWidth, obj_stage.offsetHeight);
         }
     }
 
