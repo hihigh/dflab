@@ -199,6 +199,16 @@ class ImageThumb extends PIXI.Sprite {
         var video = document.querySelector('#gum-local');
         this.texture = PIXI.Texture.fromVideo(video);
 
+        // var filter = new PIXI.filters.AsciiFilter();
+        // var filter = new PIXI.filters.CrossHatchFilter();
+        var filter = new PIXI.filters.DotFilter();
+        // var filter = new PIXI.filters.OldFilmFilter();
+        // var filter = new PIXI.filters.PixelateFilter();
+        // var filter = new PIXI.filters.RGBSplitFilter();
+        // var filter = new PIXI.filters.ZoomBlurFilter();
+
+
+        this.filters = [filter];
     }
 
     init(){
