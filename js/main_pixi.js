@@ -251,7 +251,7 @@ class ImageThumb extends PIXI.Sprite {
         this.filtersArr.push(filter);
 
         filter = new PIXI.filters.DotFilter();
-        filter.scale = 0.;
+        filter.scale = 0.4;
         this.filtersArr.push(filter);
 
         filter = new PIXI.filters.RGBSplitFilter();
