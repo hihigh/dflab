@@ -206,7 +206,7 @@ class ImageThumb extends PIXI.Sprite {
         var per = stH / video.videoHeight;
 
         this.height = stH * ratio;
-        this.width = (video.videoHeight * per) * ratio;
+        this.width = (video.videoWidth * per) * ratio;
 
 
         /*var ratio = 1;
