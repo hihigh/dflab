@@ -56,7 +56,7 @@ var FilterImage = function(args){
         video.onloadedmetadata = function() {
             setSprite();
             addEvent();
-            drawCanvas();
+            // drawCanvas();
         };
     };
 
@@ -73,8 +73,6 @@ var FilterImage = function(args){
         _this.pixi.render.add(function( dleta ) {
             renderNum++;
             if(image_thumb) image_thumb.render();
-            console.log(":ddddd")
-
 
         });
     };
@@ -82,7 +80,7 @@ var FilterImage = function(args){
 
     var addEvent = function(){
         var btn = document.querySelector("#gum-local");
-        btn.addEventListener("touchend", saveImage);
+        btn.addEventListener("touchstart", saveImage);
 
 
     };
