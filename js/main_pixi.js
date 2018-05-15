@@ -206,6 +206,10 @@ class ImageThumb extends PIXI.Sprite {
         this.width = video.videoWidth * per;
 
 
+        this.width = filterPixi.pixi.app.screen.width * 2;
+        this.height = filterPixi.pixi.app.screen.height * 2;
+
+
         /*var ratio = 1;
 
         var per = (filterPixi.options.stageHeight * ratio) / video.videoHeight;
@@ -219,29 +223,27 @@ class ImageThumb extends PIXI.Sprite {
         this.width = filterPixi.options.stageWidth * window.devicePixelRatio;
         this.height = video.videoHeight * per;*/
 
-        this.filters = [this.filtersArr[2]];
+        this.filters = [this.filtersArr[this.filtersIndex]];
     }
 
     settingFilters(){
         var filter;
         this.filtersArr = [];
+        this.filtersIndex = 0;
 
         filter = new PIXI.filters.AsciiFilter();
-        this.filtersArr.push(filter);
-
-        filter = new PIXI.filters.CrossHatchFilter();
-        this.filtersArr.push(filter);
-
-        filter = new PIXI.filters.DotFilter();
-        this.filtersArr.push(filter);
-
-        filter = new PIXI.filters.OldFilmFilter();
         this.filtersArr.push(filter);
 
         filter = new PIXI.filters.PixelateFilter();
         this.filtersArr.push(filter);
 
+        filter = new PIXI.filters.DotFilter();
+        this.filtersArr.push(filter);
+
         filter = new PIXI.filters.RGBSplitFilter();
+        this.filtersArr.push(filter);
+
+        filter = new PIXI.filters.OldFilmFilter();
         this.filtersArr.push(filter);
 
         var colorMatrix =  [
@@ -253,9 +255,21 @@ class ImageThumb extends PIXI.Sprite {
         filter = new PIXI.filters.ColorMatrixFilter();
         filter.matrix = colorMatrix;
         this.filtersArr.push(filter);
+
+        filter = new PIXI.filters.CrossHatchFilter();
+        this.filtersArr.push(filter);
     }
 
     init(){
+        this.interactive = true;
+        this.buttonMode = true;
+
+        this.on('pointertap', this.changeFilters);
+    }
+
+    changeFilters(){
+        this.filtersIndex = (this.filtersIndex + 1) % this.filtersArr.length;
+        this.filters = [this.filtersArr[this.filtersIndex]];
 
     }
 
