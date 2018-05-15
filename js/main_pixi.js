@@ -233,9 +233,16 @@ class ImageThumb extends PIXI.Sprite {
         this.filtersArr.push("");
 
 
-        filter = new PIXI.filters.ConvolutionFilter();
-        filter.width = 1;
-        filter.height = 10;
+        filter = new PIXI.filters.GodrayFilter();
+        this.filtersArr.push(filter);
+
+        filter = new PIXI.filters.GlitchFilter();
+        filter.fillMode = 1
+        filter.slices = 10;
+        filter.direction = -23
+        this.filtersArr.push(filter);
+
+        filter = new PIXI.filters.CRTFilter();
         this.filtersArr.push(filter);
 
         filter = new PIXI.filters.PixelateFilter();
