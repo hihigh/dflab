@@ -55,6 +55,8 @@ var FilterImage = function(args){
     var startVideoPlay = function(){
         video.onloadedmetadata = function() {
             setSprite();
+            addEvent();
+            drawCanvas();
         };
     };
 
@@ -71,6 +73,7 @@ var FilterImage = function(args){
         _this.pixi.render.add(function( dleta ) {
             renderNum++;
             if(image_thumb) image_thumb.render();
+            console.log(":ddddd")
 
 
         });
@@ -78,6 +81,34 @@ var FilterImage = function(args){
 
 
     var addEvent = function(){
+        var btn = document.querySelector("#gum-local");
+        btn.addEventListener("touchend", saveImage);
+
+
+    };
+
+    var saveImage = function(){
+
+
+        var url = filterPixi.saveImage();
+
+        var img = document.createElement('img');
+        img.src = url;
+
+        var wrap = document.querySelector(".wrap-capture");
+        wrap.appendChild(img);
+
+/*
+
+        var canvas = document.querySelector(".content canvas");
+
+        var img = document.createElement('img');
+        img.src = canvas.toDataURL();
+
+        var wrap = document.querySelector(".site-wrapper");
+        wrap.appendChild(img);
+
+        console.log( filterPixi.saveImage() )*/
 
     }
 
@@ -171,6 +202,11 @@ FilterImage.prototype = {
 
     resetValue : function(){
 
+    },
+
+    saveImage : function(){
+        var url = this.pixi.app.renderer.view.toDataURL("image/png", 1)
+        return url;
     }
 };
 
@@ -232,12 +268,10 @@ class ImageThumb extends PIXI.Sprite {
 
         this.filtersArr.push("");
 
-
-        filter = new PIXI.filters.GodrayFilter();
+        filter = new PIXI.filters.CRTFilter();
         this.filtersArr.push(filter);
 
-
-        filter = new PIXI.filters.CRTFilter();
+        filter = new PIXI.filters.GodrayFilter();
         this.filtersArr.push(filter);
 
         filter = new PIXI.filters.PixelateFilter();
@@ -291,6 +325,8 @@ class ImageThumb extends PIXI.Sprite {
     render(){
 
     }
+
+
 }
 
 
