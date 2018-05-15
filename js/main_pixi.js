@@ -80,7 +80,7 @@ var FilterImage = function(args){
 
     var addEvent = function(){
         var btn = document.querySelector("#gum-local");
-        btn.addEventListener("touchstart", saveImage);
+        // btn.addEventListener("touchstart", saveImage);
 
 
     };
