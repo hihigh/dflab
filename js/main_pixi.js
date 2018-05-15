@@ -202,12 +202,13 @@ class ImageThumb extends PIXI.Sprite {
 
         var per = (filterPixi.options.stageHeight) / video.videoHeight;
 
-        this.height = filterPixi.options.stageHeight;
-        this.width = video.videoWidth * per;
+        /*this.height = filterPixi.options.stageHeight;
+        this.width = video.videoWidth * per;*/
 
+        var ratio = window.devicePixelRatio;
 
-        this.width = filterPixi.pixi.app.screen.width * 2;
-        this.height = filterPixi.pixi.app.screen.height * 2;
+        this.width = filterPixi.pixi.app.screen.width * ratio;
+        this.height = filterPixi.pixi.app.screen.height * ratio;
 
 
         /*var ratio = 1;
@@ -223,16 +224,13 @@ class ImageThumb extends PIXI.Sprite {
         this.width = filterPixi.options.stageWidth * window.devicePixelRatio;
         this.height = video.videoHeight * per;*/
 
-        this.filters = [this.filtersArr[this.filtersIndex]];
+        // this.filters = [this.filtersArr[this.filtersIndex]];
     }
 
     settingFilters(){
         var filter;
         this.filtersArr = [];
         this.filtersIndex = 0;
-
-        filter = new PIXI.filters.AsciiFilter();
-        this.filtersArr.push(filter);
 
         filter = new PIXI.filters.PixelateFilter();
         this.filtersArr.push(filter);
