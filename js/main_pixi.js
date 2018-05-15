@@ -232,6 +232,8 @@ class ImageThumb extends PIXI.Sprite {
         this.filtersArr = [];
         this.filtersIndex = 0;
 
+        this.filtersArr.push("");
+
         filter = new PIXI.filters.PixelateFilter();
         this.filtersArr.push(filter);
 
