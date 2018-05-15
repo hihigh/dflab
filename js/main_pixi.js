@@ -195,6 +195,19 @@ class ImageThumb extends PIXI.Sprite {
 
     setting(video){
 
+        this.settingFilters();
+
+
+        this.texture = PIXI.Texture.fromVideo(video);
+        var per = (filterPixi.options.stageWidth * window.devicePixelRatio) / video.videoWidth;
+
+        this.width = filterPixi.options.stageWidth * window.devicePixelRatio;
+        this.height = video.videoHeight * per;
+
+        this.filters = [this.filtersArr[2]];
+    }
+
+    settingFilters(){
         var filter;
         this.filtersArr = [];
 
@@ -225,39 +238,6 @@ class ImageThumb extends PIXI.Sprite {
         filter = new PIXI.filters.ColorMatrixFilter();
         filter.matrix = colorMatrix;
         this.filtersArr.push(filter);
-
-
-        // area dummy
-        var graphics = new PIXI.Graphics();
-        graphics.lineStyle(1, 0xFF0000, 1);
-        graphics.beginFill("0xff0000");
-        graphics.drawRect(0,0,window.innerWidth/2,window.innerHeight/2);
-        // this.addChild(graphics);
-
-
-        this.texture = PIXI.Texture.fromVideo(video);
-        console.log(filterPixi.options.stageWidth, video.videoWidth / this.width, video.videoWidth , this.width)
-        // this.scale = 50
-        this.width = video.videoWidth;
-        this.height = video.videoHeight;
-
-        //window.devicePixelRatio
-
-        // console.log(this.texture)
-
-
-
-
-
-        // var filter = new PIXI.filters.AsciiFilter();
-        // var filter = new PIXI.filters.CrossHatchFilter();
-        // var filter = new PIXI.filters.DotFilter();
-        // var filter = new PIXI.filters.OldFilmFilter();
-        // var filter = new PIXI.filters.PixelateFilter();
-        // var filter = new PIXI.filters.RGBSplitFilter();
-        /*var filter = new PIXI.filters.ColorMatrixFilter();
-        filter.matrix = colorMatrix;*/
-        this.filters = [filter];
     }
 
     init(){
