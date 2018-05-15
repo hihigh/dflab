@@ -21,21 +21,23 @@
     <style>
         body {background: 0; width: 100%; height:100%; overflow: hidden}
         main {width: 100%; height:100%}
-        .content {width: 100%; height:100%; position: fixed;}
-        /*.content canvas {width: 100%;}*/
+        .frame-ui {display: none;}
 
-        #gum-local {width: 50%;}
+
+        .title-txt {color: #ffffff; margin: 20px 0 10px}
+        #gum-local {width: 100%}
+        #obj_stage {width: 100%; height: 200px;}
 
     </style>
-</head>
 
 <body>
-
-
 <main class="site-wrapper">
+    <p class="title-txt">Video</p>
     <video id="gum-local" autoplay playsinline loop></video>
+    <p class="title-txt">canvas - PIXI</p>
     <div class="content" id="obj_stage"></div>
 </main>
+
 
 <script type="text/javascript" src="js/common_withPixi.bundle.js"></script>
 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>

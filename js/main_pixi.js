@@ -1,5 +1,3 @@
-
-
 var FilterImage = function(args){
 
     console.log("=================================")
@@ -23,7 +21,7 @@ var FilterImage = function(args){
     };
 
 
-    var video = document.querySelector('video');
+    var video = document.querySelector('#gum-local');
     var constraints = window.constraints = {
         audio: false,
         // video: true
@@ -53,8 +51,9 @@ var FilterImage = function(args){
     var handleError = function(error) {
         console.error("error");
         var url = "./video/test_v0.mp4";
+        video.src = url;
 
-        setSprite(url);
+        setSprite(video);
     };
 
 
@@ -197,7 +196,8 @@ class ImageThumb extends PIXI.Sprite {
         graphics.drawRect(0,0,window.innerWidth/2,window.innerHeight/2);
         // this.addChild(graphics);
 
-        this.texture = PIXI.Texture.fromVideo(url);
+        var video = document.querySelector('#gum-local');
+        this.texture = PIXI.Texture.fromVideo(video);
 
     }
 
