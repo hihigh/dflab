@@ -197,7 +197,7 @@ class ImageThumb extends PIXI.Sprite {
         this.settingFilters();
         this.settingScene(video);
 
-        this.filters = [this.filtersArr[1]];
+        this.filters = [this.filtersArr[0]];
 
         this.interactive = true;
         this.buttonMode = true;
@@ -214,7 +214,7 @@ class ImageThumb extends PIXI.Sprite {
 
         this.height = oriH;
         this.width = video.videoWidth * per;
-        this.x = -(this.width - (oriW*ratio)) * 0.5;
+        // this.x = -(this.width - (oriW*ratio)) * 0.5;
     }
 
     settingFilters(){
