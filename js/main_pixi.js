@@ -236,11 +236,6 @@ class ImageThumb extends PIXI.Sprite {
         filter = new PIXI.filters.GodrayFilter();
         this.filtersArr.push(filter);
 
-        filter = new PIXI.filters.GlitchFilter();
-        filter.fillMode = 1
-        filter.slices = 10;
-        filter.direction = -23
-        this.filtersArr.push(filter);
 
         filter = new PIXI.filters.CRTFilter();
         this.filtersArr.push(filter);
@@ -252,6 +247,10 @@ class ImageThumb extends PIXI.Sprite {
 
         filter = new PIXI.filters.DotFilter();
         filter.scale = 0.4;
+        this.filtersArr.push(filter);
+
+        filter = new PIXI.filters.DotFilter();
+        filter.scale = 0;
         this.filtersArr.push(filter);
 
         filter = new PIXI.filters.RGBSplitFilter();
