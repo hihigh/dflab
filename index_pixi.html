@@ -7,7 +7,7 @@
     <!-- viewport for mobile device / REF : http://aboooks.tistory.com/352 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>webRTC - camera</title>
+    <title>webRTC - camera filters</title>
 
     <!-- PWA -->
     <meta name="mobile-web-app-capable" content="yes">
@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="css/frame.css">
     <style>
 
-        .frame-ui {display: none;}
         #gum-local {position:fixed; width: 50px; bottom: 0; right: 0; z-index: 10}
 
         body {background: 0; width: 100%; height:100%; overflow: hidden}
@@ -47,7 +46,16 @@
 </main>
 
 <div class="wrap-capture"></div>
-
+<!-- Frame UI -->
+<div class="frame-ui">
+    <div class="wrap-txt">
+        <h1 class="title">webRTC - camera filters</h1>
+        <p class="description"><span>실시간 카메라에 여러가지 필터를 적용</span></p>
+        <p class="manual"><span>Click to stage : change filter</span></p>
+    </div>
+    <button class="btn-expend"><i class="material-icons">expand_less</i><span class="blind">Expend Less</span></button>
+    <button class="btn-back" data-path="http://dev.designfever.com/lab/"><i class="material-icons">arrow_back</i><span class="blind">Back</span></button>
+</div>
 
 
 
