@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/frame.css">
+
+    <script src="js/common.bundle.js"></script>
     <!--<link rel="stylesheet" href="css/main.css">-->
 </head>
 
@@ -46,26 +48,33 @@
 
 <body>
 
-<div id="container">
-    <div id="instant">Instant : <p class="value">0</p></div>
-    <div id="slow">Slow : <p class="value">0</p></div>
-    <div id="clip">Clip : <p class="value">0</p></div>
-    <p class="des">The 'instant' volume changes approximately every 50ms; the 'slow' volume approximates the average volume over about a second.</p>
-    <a href="https://webrtc.github.io/samples/src/content/getusermedia/volume/" class="outlink">go webrtc.github.io</a>
+
+<div id="app" class="app-container site-wrapper">
+    <comp-frame :root-path="'http://dev.designfever.com/lab/'"
+                :active-id="'id_etc_WebRTCAudioTest'"
+                :is-white-mode="false"
+                :content-info-title="'WebRTC - Audio'"
+                :content-info-description="'Audio Test in Mobile Device'"
+                :content-info-manual="''"
+    ></comp-frame>
+    <div id="container">
+        <div id="instant">Instant : <p class="value">0</p></div>
+        <div id="slow">Slow : <p class="value">0</p></div>
+        <div id="clip">Clip : <p class="value">0</p></div>
+        <p class="des">The 'instant' volume changes approximately every 50ms; the 'slow' volume approximates the average volume over about a second.</p>
+        <a href="https://webrtc.github.io/samples/src/content/getusermedia/volume/" class="outlink">go webrtc.github.io</a>
+    </div>
 </div>
 
+<script src="js/frame_main.bundle.js"></script>
+<script>
+    window.initVue();
+</script>
 
-<!-- Frame UI -->
-<div class="frame-ui">
-    <button class="btn-back" data-path="http://dev.designfever.com/lab/"><i class="material-icons">arrow_back</i><span class="blind">Back</span></button>
-</div>
 
 
-<script src="js/common.bundle.js"></script>
+
 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-
-
-
 
 <!--  soundmeter.js  -->
 <!--  https://webrtc.github.io/samples/src/content/getusermedia/volume/  -->

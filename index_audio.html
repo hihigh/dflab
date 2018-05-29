@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/frame.css">
     <link rel="stylesheet" href="css/main.css">
-    <!--<link rel="stylesheet" href="css/base.css">-->
+    <script src="js/common.bundle.js"></script>
 
     <style>
         #container p{
@@ -56,28 +56,26 @@
 
 <body>
 
-<div id="container">
-    <!--<div id="debug"><p class="value">00000</p></div>-->
-    <div id="instant"><p class="value">0</p></div>
-    <div class="rotate-obj"></div>
-</div>
-
-
-
-<!-- Frame UI -->
-<div class="frame-ui">
-    <div class="wrap-txt">
-        <h1 class="title">WebRTC - audio</h1>
-        <p class="description"><span>볼륨 입력값에 맞추어 객체를 움직임</span></p>
-        <p class="manual"><span>Click to stage : add power<br>Breathe and speak : add power</span></p>
-        <p class="manual"><span></span></p>
+<div id="app" class="app-container site-wrapper">
+    <comp-frame :root-path="'http://dev.designfever.com/lab/'"
+                :active-id="'id_justfun_webrtc_audio'"
+                :is-white-mode="false"
+                :content-info-title="'WebRTC - audio'"
+                :content-info-description="'볼륨 입력값에 맞추어 객체를 움직임.'"
+                :content-info-manual="'Click to stage : add power<br>Breathe and speak : add power'"
+    ></comp-frame>
+    <div id="container">
+        <!--<div id="debug"><p class="value">00000</p></div>-->
+        <div id="instant"><p class="value">0</p></div>
+        <div class="rotate-obj"></div>
     </div>
-    <button class="btn-expend"><i class="material-icons">expand_less</i><span class="blind">Expend Less</span></button>
-    <button class="btn-back" data-path="http://dev.designfever.com/lab/"><i class="material-icons">arrow_back</i><span class="blind">Back</span></button>
-    <!--http://dev.designfever.com/lab/contents/just-fun/-->
+
 </div>
 
-<script src="js/common.bundle.js"></script>
+<script src="js/frame_main.bundle.js"></script>
+<script>
+    window.initVue();
+</script>
 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
 
 <script src="js/soundmeter.js"></script>

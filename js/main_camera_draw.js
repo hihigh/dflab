@@ -84,7 +84,7 @@ function startVideo(){
 function readyStart(isDebug){
     video.classList.add("add");
 
-    settingGif();
+    // settingGif();
     // sortPosition();
 
     if(!isDrawing){
@@ -97,8 +97,8 @@ function readyStart(isDebug){
         var btnReset = document.querySelector(".js-btn-reset");
         btnReset.addEventListener("touchstart", reset);
 
-        var btnGif = document.querySelector(".js-btn-save");
-        btnGif.addEventListener("touchstart", showGif);
+        /*var btnGif = document.querySelector(".js-btn-save");
+        btnGif.addEventListener("touchstart", showGif);*/
 
         var btnReserverse = document.querySelector(".js-btn-reverse");
         btnReserverse.addEventListener("touchstart", startVideo);
@@ -181,7 +181,7 @@ function captureImage(){
     img.src = canvas.toDataURL();
     container.appendChild(img);
 
-    gif.addFrame(canvas, {delay: 100});
+    // gif.addFrame(canvas, {delay: 100});
 
     /*var setImg = imgsArr[capIndex++];
     setImg.src = canvas.toDataURL();

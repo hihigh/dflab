@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/frame.css">
+    <script type="text/javascript" src="js/common_withPixi.bundle.js"></script>
+
     <style>
 
         #gum-local {position:fixed; width: 50px; bottom: 0; right: 0; z-index: 10}
@@ -39,28 +41,33 @@
 
 <body>
 
-<video id="gum-local" autoplay playsinline loop></video>
 
-<main class="site-wrapper">
-    <div class="content" id="obj_stage"></div>
-</main>
+<div id="app" class="app-container site-wrapper">
+    <comp-frame :root-path="'http://dev.designfever.com/lab/'"
+                :active-id="'id_justfun_webrtc_camera_filters'"
+                :is-white-mode="false"
+                :content-info-title="'webRTC - camera filters'"
+                :content-info-description="'실시간 카메라에 여러가지 필터를 적용.'"
+                :content-info-manual="'Click to stage : change filter'"
+    ></comp-frame>
 
-<div class="wrap-capture"></div>
-<!-- Frame UI -->
-<div class="frame-ui">
-    <div class="wrap-txt">
-        <h1 class="title">webRTC - camera filters</h1>
-        <p class="description"><span>실시간 카메라에 여러가지 필터를 적용</span></p>
-        <p class="manual"><span>Click to stage : change filter</span></p>
-    </div>
-    <button class="btn-expend"><i class="material-icons">expand_less</i><span class="blind">Expend Less</span></button>
-    <button class="btn-back" data-path="http://dev.designfever.com/lab/"><i class="material-icons">arrow_back</i><span class="blind">Back</span></button>
+    <video id="gum-local" autoplay playsinline loop></video>
+
+    <main class="site-wrapper">
+        <div class="content" id="obj_stage"></div>
+    </main>
+    <div class="wrap-capture"></div>
 </div>
 
+<script src="js/frame_main.bundle.js"></script>
+<script>
+    window.initVue();
+</script>
 
 
 
-<script type="text/javascript" src="js/common_withPixi.bundle.js"></script>
+
+
 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
 <script src="js/pixi-filters.js"></script>
 <script src="js/main_pixi.js?unq=00"></script>

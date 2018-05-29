@@ -17,52 +17,59 @@
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/frame.css">
     <link rel="stylesheet" href="css/main.css">
-    <!--<link rel="stylesheet" href="css/base.css">-->
-
+    <script src="js/common.bundle.js"></script>
 
 </head>
 
 <body>
 
-<div id="container">
-    <canvas id="draw-canvas" class="filter-video" width="0" height="0"></canvas>
-</div>
+
+<div id="app" class="app-container site-wrapper">
+    <comp-frame :root-path="'http://dev.designfever.com/lab/'"
+                :active-id="'id_justfun_webrtc_camera'"
+                :is-white-mode="false"
+                :content-info-title="'WebRTC - camera'"
+                :content-info-description="'카메라로 찍은 사진을 정방향 역방향으로 연결시켜 반복.'"
+                :content-info-manual="'Click to stage : capture photo<br>reverse : reverse camera (ios only)<br>show : show image<br>reset : retry'"
+    ></comp-frame>
+    <div class="content" id="obj_stage"></div>
 
 
-<div class="wrapper-video">
-    <!--<h2>video</h2>-->
-    <video id="gum-local" autoplay playsinline loop></video>
-</div>
-
-<div class="wrapper-capture">
-</div>
-
-<div class="wrapper-btn">
-    <button class="js-btn-reverse">reverse</button>
-    <button class="js-btn-show">show</button>
-    <button class="js-btn-reset">reset</button>
-    <button class="js-btn-save" style="display: none">gif</button>
-    <!--<button class="js-btn-save">save</button>-->
-</div>
-
-<!-- Frame UI -->
-<div class="frame-ui">
-    <div class="wrap-txt">
-        <h1 class="title">WebRTC - camera</h1>
-        <p class="description"><span>카메라로 찍은 사진을 정방향 역방향으로 연결시켜 반복</span></p>
-        <p class="manual"><span>Click to stage : capture photo<br>reverse : reverse camera (ios only)<br>show : show image<br>reset : retry</span></p>
+    <div id="container">
+        <canvas id="draw-canvas" class="filter-video" width="0" height="0"></canvas>
     </div>
-    <button class="btn-expend"><i class="material-icons">expand_less</i><span class="blind">Expend Less</span></button>
-    <button class="btn-back" data-path="http://dev.designfever.com/lab/"><i class="material-icons">arrow_back</i><span class="blind">Back</span></button>
-    <!--http://dev.designfever.com/lab/contents/just-fun/-->
+
+
+    <div class="wrapper-video">
+        <!--<h2>video</h2>-->
+        <video id="gum-local" autoplay playsinline loop></video>
+    </div>
+
+    <div class="wrapper-capture">
+    </div>
+
+    <div class="wrapper-btn">
+        <button class="js-btn-reverse">camera reverse</button>
+        <button class="js-btn-show">show</button>
+        <button class="js-btn-reset">reset</button>
+        <button class="js-btn-save" style="display: none">gif</button>
+        <!--<button class="js-btn-save">save</button>-->
+    </div>
+
 </div>
 
+<script src="js/frame_main.bundle.js"></script>
+<script>
+    window.initVue();
+</script>
 
-<script src="js/common.bundle.js"></script>
+
+
+
 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
 
-<script src="js/gif.js"></script>
-<script src="js/gif.worker.js"></script>
+<!--<script src="js/gif.js"></script>
+<script src="js/gif.worker.js"></script>-->
 <script src="js/main_camera_draw.js"></script>
 
 
