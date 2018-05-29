@@ -2,9 +2,9 @@
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 
 /*font*/
-@import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
-@import url(https://fonts.googleapis.com/earlyaccess/notosansjp.css);
-@import url(https://fonts.googleapis.com/earlyaccess/notosanssc.css);
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+@import url(http://fonts.googleapis.com/earlyaccess/notosansjp.css);
+@import url(http://fonts.googleapis.com/earlyaccess/notosanssc.css);
 /*  한국어 */
 :lang(ko) {
     font-family: 'Noto Sans KR', sans-serif;
@@ -39,9 +39,10 @@ time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
-    font: inherit;
+    /*font-size: 100%;*/
+    /*font: inherit;*/
     vertical-align: baseline;
+    font-weight: normal;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -137,4 +138,15 @@ button::-moz-focus-inner {
     content: "";
     clear: both;
     display: table;
+}
+
+::selection {
+    background: #663399; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+    background: #663399; /* Gecko Browsers */
+}
+
+.hide{
+    display: none !important;
 }
