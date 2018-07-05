@@ -50,7 +50,7 @@ var VideoDisplacementMap = function(args, video){
             side: THREE.DoubleSide,    // 両面に映す
             map: texture,              // テクスチャ
             displacementMap: texture,  // displacementのテクスチャ
-            displacementScale: -15     // displacementの大きさ
+            displacementScale: 55     // displacementの大きさ
         });
         plane = new THREE.Mesh(geometry, material);
         plane.geometry.verticesNeedUpdate = true;
