@@ -39,7 +39,7 @@ var VideoDisplacementMap = function(args, video){
 
 
 
-        geometry = new THREE.PlaneGeometry(100, 100, 128, 128);
+        geometry = new THREE.PlaneGeometry(50, 100, 128, 128);
         //w, h, seX, seY
         texture = new THREE.VideoTexture(video);
         texture.minFilter = THREE.LinearFilter;
@@ -82,7 +82,7 @@ var VideoDisplacementMap = function(args, video){
         renderer.setViewport(1, 1, SCREEN_WIDTH, SCREEN_HEIGHT);
         renderer.render(scene, cameraL);
 
-        plane.rotation.y = plane.rotation.y + 0.01;
+        plane.rotation.y = plane.rotation.y + 0.002;
     }
 
 
