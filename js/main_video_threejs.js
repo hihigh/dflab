@@ -47,10 +47,10 @@ var VideoDisplacementMap = function(args, video){
         texture.format = THREE.RGBFormat;
 
         material = new THREE.MeshPhongMaterial({
-            side: THREE.DoubleSide,    // 両面に映す
-            map: texture,              // テクスチャ
-            displacementMap: texture,  // displacementのテクスチャ
-            displacementScale: 55     // displacementの大きさ
+            side: THREE.DoubleSide,
+            map: texture,
+            displacementMap: texture,
+            displacementScale: 55
         });
         plane = new THREE.Mesh(geometry, material);
         plane.geometry.verticesNeedUpdate = true;
