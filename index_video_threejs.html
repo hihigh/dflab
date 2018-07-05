@@ -118,9 +118,8 @@
 
 
     function startVideo(constraints){
-        startDisplacementVideo()
-        /*navigator.mediaDevices.getUserMedia(constraints).
-        then(handleSuccess).catch(handleError);*/
+        navigator.mediaDevices.getUserMedia(constraints).
+        then(handleSuccess).catch(handleError);
     }
 
 
