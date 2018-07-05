@@ -16,7 +16,7 @@ var VideoDisplacementMap = function(args){
         SCREEN_HEIGHT = window.innerHeight;
 
     var container = document.getElementById("displ");
-    var video = document.getElementById("video");
+    var video = document.getElementById("gum-local");
 
     function setting(opts, _ratio){
 
