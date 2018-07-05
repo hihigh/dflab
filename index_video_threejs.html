@@ -32,6 +32,7 @@
     video {
         background: #222;
         width: 50%;
+        display: none;
     }
 
     .btn-camera {width: 50%; height: 100%; margin: 40px 0 0px 0; float: left; line-height: 80vh}
@@ -64,11 +65,11 @@
 
     <div class="wrapper-video hide">
         <video id="gum-local" autoplay playsinline loop></video>
-        <div id="displ"></div>
+
     </div>
 
 </div>
-
+<div id="displ"></div>
 <script src="js/frame_main.bundle.js"></script>
 <script>
     window.initVue();
