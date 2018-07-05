@@ -58,6 +58,7 @@
 
     <div class="wrapper-video hide">
         <video id="gum-local" autoplay playsinline loop></video>
+        <div id="displ"></div>
     </div>
 
 </div>
@@ -72,13 +73,13 @@
 
 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
 
-<!--<script src="js/vendor/three/three.js"></script>-->
-<!--<script src="js/vendor/three/OrbitControls.js"></script>-->
-<!--<script src="js/main_video_threejs.js"></script>-->
+<script src="js/vendor/three/three.js"></script>
+<script src="js/vendor/three/OrbitControls.js"></script>
+<script src="js/main_video_threejs.js"></script>
 
 
 <script>
-    var video = document.querySelector('video');
+    var video = document.querySelector('#gum-local');
     var video_wrap = document.querySelector('.wrapper-video');
 
     var front = document.querySelector(".btn-front");
@@ -112,6 +113,10 @@
     }
 
 
+    function showThreeVideo(){
+        var app = new VideoDisplacementMap({}, video);
+        app.init();
+    }
 
 
 
@@ -139,6 +144,8 @@
         };
         window.stream = stream; // make variable available to browser console
         video.srcObject = stream;
+
+        showThreeVideo();
     }
 
     function handleError(error) {
@@ -151,6 +158,16 @@
                 'order for the demo to work.');
         }
         errorMsg('getUserMedia error: ' + error.name, error);
+
+        sampleVideoPlay();
+    }
+
+    function sampleVideoPlay(){
+        console.log("dfdfdfdfdfdfdf", video)
+        video.setAttribute("src", "./video/test_v0.mp4");
+        video.load();
+
+        showThreeVideo();
     }
 
     function errorMsg(msg, error) {
