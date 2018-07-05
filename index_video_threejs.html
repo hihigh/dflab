@@ -155,7 +155,7 @@
         window.stream = stream; // make variable available to browser console
         video.srcObject = stream;
 
-        startDisplacementVideo();
+        // startDisplacementVideo();
     }
 
     function handleError(error) {
@@ -169,7 +169,7 @@
         }
         errorMsg('getUserMedia error: ' + error.name, error);
 
-        startDisplacementVideo();
+        // startDisplacementVideo();
     }
 
     function errorMsg(msg, error) {
