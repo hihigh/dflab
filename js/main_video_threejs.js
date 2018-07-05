@@ -80,6 +80,8 @@ var VideoDisplacementMap = function(args, video){
         renderer.setViewport(1, 1, SCREEN_WIDTH, SCREEN_HEIGHT);
         renderer.render(scene, cameraL);
 
+        plane.rotation.y = plane.rotation.y + 0.01
+
     }
 
 

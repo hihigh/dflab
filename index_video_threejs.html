@@ -31,13 +31,19 @@
 
     video {
         background: #222;
-        width: 100%;
+        width: 50%;
     }
 
     .btn-camera {width: 50%; height: 100%; margin: 40px 0 0px 0; float: left; line-height: 80vh}
 
     .hide {display: none}
 
+    #displ {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        touch-action: none;
+    }
 
 </style>
 
@@ -136,9 +142,6 @@
     };
 
     function handleSuccess(stream) {
-        sampleVideoPlay();
-        return;
-
         var videoTracks = stream.getVideoTracks();
         console.log('Got stream with constraints:', constraints);
         console.log('Using video device: ' + videoTracks[0].label);
