@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
@@ -42,15 +43,6 @@
 
 <body>
 
-<!--<div id="displ"></div>
-<div id="button">
-    <input type="button" value="load" onclick="video.load();" />
-    <input type="button" value="play" onclick="video.play();" />
-    <input type="button" value="stop" onclick="video.pause();" />
-</div>
-<video id="video" src="./video/test_v0.mp4" style="display: block" autoplay loop playsinline muted ></video>-->
-
-
 
 <div id="app" class="app-container site-wrapper">
     <comp-frame :root-path="'http://dev.designfever.com/lab/'"
@@ -66,26 +58,21 @@
 
     <div class="wrapper-video hide">
         <video id="gum-local" autoplay playsinline loop></video>
-        <div id="displ"></div>
     </div>
-
-
 
 </div>
 
-<script src="js/vendor/three/three.js"></script>
-<script src="js/vendor/three/OrbitControls.js"></script>
-<script src="js/frame_main.bundle.js?unq=000"></script>
+<script src="js/frame_main.bundle.js"></script>
 <script>
     window.initVue();
 </script>
 
 
 
-
+<script src="js/vendor/three/three.js"></script>
+<script src="js/vendor/three/OrbitControls.js"></script>
 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
 <script src="js/main_video_threejs.js"></script>
-
 
 
 <script>
@@ -125,10 +112,6 @@
 
 
 
-    function startDisplacementVideo(){
-        var app = new VideoDisplacementMap();
-        app.init();
-    }
 
 
 
@@ -154,8 +137,6 @@
         };
         window.stream = stream; // make variable available to browser console
         video.srcObject = stream;
-
-        // startDisplacementVideo();
     }
 
     function handleError(error) {
@@ -168,8 +149,6 @@
                 'order for the demo to work.');
         }
         errorMsg('getUserMedia error: ' + error.name, error);
-
-        // startDisplacementVideo();
     }
 
     function errorMsg(msg, error) {
