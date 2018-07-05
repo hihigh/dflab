@@ -26,7 +26,7 @@ var VideoDisplacementMap = function(args, video){
         scene = new THREE.Scene();
 
         cameraL = new THREE.PerspectiveCamera(75, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 1000);
-        cameraL.position.set(0, 0, 80);
+        cameraL.position.set(0, 0, 500);
         controls = new THREE.OrbitControls(cameraL);
         scene.add(cameraL);
 
@@ -38,8 +38,8 @@ var VideoDisplacementMap = function(args, video){
         scene.add(light2);
 
 
-
-        geometry = new THREE.PlaneGeometry(70, 100, 128, 128);
+        console.log(SCREEN_WIDTH, SCREEN_HEIGHT)
+        geometry = new THREE.PlaneGeometry(SCREEN_WIDTH, SCREEN_HEIGHT, 64, 64);
         //w, h, seX, seY
         texture = new THREE.VideoTexture(video);
         texture.minFilter = THREE.LinearFilter;
@@ -83,6 +83,9 @@ var VideoDisplacementMap = function(args, video){
         renderer.render(scene, cameraL);
 
         plane.rotation.y = plane.rotation.y + 0.002;
+
+
+
     }
 
 
