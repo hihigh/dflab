@@ -39,7 +39,7 @@ var VideoDisplacementMap = function(args, video){
 
 
 
-        geometry = new THREE.PlaneGeometry(50, 100, 128, 128);
+        geometry = new THREE.PlaneGeometry(70, 100, 128, 128);
         //w, h, seX, seY
         texture = new THREE.VideoTexture(video);
         texture.minFilter = THREE.LinearFilter;
