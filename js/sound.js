@@ -41,7 +41,7 @@ function updateAnalysers(time) {
     {
         var SPACING = 10;
         var BAR_WIDTH = 5;
-        var numBars = Math.round(3500 / SPACING);
+        var numBars = Math.round(3000 / SPACING);
         var freqByteData = new Uint8Array(analyserNode.frequencyBinCount);
 
         analyserNode.getByteFrequencyData(freqByteData);
@@ -76,7 +76,7 @@ function updateAnalysers(time) {
             }*/
 
             analyserContext.fillStyle = "hsl( " + Math.round((i*360)/numBars) + ", 100%, 50%)";
-            analyserContext.fillRect(i * SPACING, 0, BAR_WIDTH, magnitude);
+            analyserContext.fillRect(i * SPACING, 0, BAR_WIDTH, magnitude*10);
 
 
         }
