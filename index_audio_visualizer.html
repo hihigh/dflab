@@ -1,39 +1,164 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
+    <!-- viewport for mobile device / REF : http://aboooks.tistory.com/352 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-        #record {
-            width: 100px;
-            height: 100px;
-            background-color: #2FA1D6;
-        }
+    <title>Sound Visualizer | DF Lab</title>
 
-        #analyser {
-            width: 100%;
-            /*width: 500px;*/
-        }
-    </style>
+    <!-- PWA -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="http://dev.designfever.com/lab/manifest.json">
+
+    <link rel="stylesheet" type="text/css" href="../../../common/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../../../common/css/base.css?uniq=20180508" />
+    <link rel="stylesheet" type="text/css" href="../../../frame/css/frame.css?uniq=20180508" />
+    <script type="text/javascript" src="../../../common/js/common_withPixi.bundle.js"></script>
+
 </head>
+<style>
+
+    body {background: 0; width: 100%; height:100%; overflow: hidden}
+    main {width: 100%; height:100%}
+    .content {width: 100%; height:100%; position: fixed;}
+
+    *:not(input):not(textarea) {
+        -webkit-user-select: none; /* disable selection/Copy of UIWebView */
+        -webkit-touch-callout: none; /* disable the IOS popup when long-press on a link */
+    }
+
+    .btn-wrapper {
+        position: absolute;
+        width: 100%;
+        height: 10%;
+        bottom: 0;
+        text-align: center;
+    }
+
+    .btn-wrapper button {
+        width: 40px; height: 40px; background-color: #000000; margin: 0 8px;
+    }
+
+    .btn-wrapper button.off {
+        background-color: #888888;
+    }
+
+    .btn-wrapper button.btn-next {
+        width: 100px;
+        background-color: #224d94;
+    }
+
+    .msg-area{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        font-size: 20px;
+        color: #1a1a1a;
+    }
+
+    .msg-area p{
+        display: inline-block;
+        top: 50%;
+        position: relative;
+        transform: translateY(-50%);
+    }
+
+
+</style>
+
 <body>
+<main class="site-wrapper">
+    <div class="content" id="obj_stage"></div>
+    <div class="msg-area"><p>edaddd</p></div>
+    <div class="btn-wrapper">
+        <button class="btn-visual">0</button>
+        <button class="btn-visual off">1</button>
+        <button class="btn-visual off">2</button>
+        <button class="btn-visual off">3</button>
+        <button class="btn-next">next music</button>
+    </div>
+</main>
 
-<canvas id="analyser" width="1280" height="2560"></canvas>
 
-</body>
+<!-- Frame UI -->
+<!--<div class="frame-ui">
+    <div class="wrap-txt">
+        <h1 class="title">Animate Character</h1>
+        <p class="description"><span>animate Character를 다수 배치하여 퍼포먼스 테스트</span></p>
+        <p class="manual"><span>Tap to stage : add Character<br>Long press and release : Add a lot of characters</span></p>
+    </div>
+    <button class="btn-expend"><i class="material-icons">expand_less</i><span class="blind">Expend Less</span></button>
+    <button class="btn-back" data-path=""><i class="material-icons">arrow_back</i><span class="blind">Back</span></button>
+</div>-->
 
-<script src="./js/sound.js"></script>
+
+<script src="js/audio_vis.js.js?unq=1211"></script>
 <script>
+
+    var obj_stage = document.getElementById("obj_stage");
+
+    var soundVisualizer = new SoundVisualizer({
+        container:obj_stage,
+        stageWidth:obj_stage.offsetWidth,
+        stageHeight:obj_stage.offsetHeight
+    }, 0.5);
+    soundVisualizer.init();
+
+    var oW = obj_stage.offsetWidth, oH=obj_stage.offsetHeight;
+    var ID_timeout = 0;
+
+    window.onresize = function(event) {
+        console.log(obj_stage.offsetWidth, oH=obj_stage.offsetHeight);
+        checkSize();
+    };
+
+    window.addEventListener("orientationchange", function() {
+        clearTimeout(ID_timeout);
+        ID_timeout = setTimeout(checkSize, 1000);
+    }, false);
+
+    function checkSize(){
+        if(oW != obj_stage.offsetWidth ||oH != obj_stage.offsetHeight) {
+            oW = obj_stage.offsetWidth;
+            oH = obj_stage.offsetHeight;
+            soundVisualizer.resetSize(obj_stage.offsetWidth, obj_stage.offsetHeight);
+        }
+    }
+
 
 </script>
 
 
+<!-- monitoring -->
+<script>
+    // stats
+    var stats = new Stats();
+    stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+    document.body.appendChild( stats.dom );
+
+    function monitoring() {
+        stats.begin();
+        // monitored code goes here
+        stats.end();
+        requestAnimationFrame( monitoring );
+    }
+    monitoring();
+
+</script>
 
 
+</body>
 </html>
+
+
+
+
+
+
+
+
