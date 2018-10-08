@@ -14,15 +14,15 @@
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="manifest" href="http://dev.designfever.com/lab/manifest.json">
 
-    <!--<link rel="stylesheet" type="text/css" href="../../../&lt;!&ndash;common/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../../../common/css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="../../../common/css/base.css?uniq=20180508" />
-    <link rel="stylesheet" type="text/css" href="../../../frame/css/frame.css?uniq=20180508" />-->
-    <script type="text/javascript" src="./js/common_withPixi.bundle.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../frame/css/frame.css?uniq=20180508" />
+    <script type="text/javascript" src="../../../common/js/common_withPixi.bundle.js"></script>
 
 </head>
 <style>
 
-    body {background: 0; width: 100%; height:100%; overflow: hidden; margin: 0}
+    body {background: 0; width: 100%; height:100%; overflow: hidden}
     main {width: 100%; height:100%}
     .content {width: 100%; height:100%; position: fixed;}
 
@@ -31,16 +31,49 @@
         -webkit-touch-callout: none; /* disable the IOS popup when long-press on a link */
     }
 
-    .btn-wrapper {
-        position: absolute;
-        width: 100%;
-        height: 10%;
-        bottom: 0;
+    .site-wrapper {
         text-align: center;
     }
 
+
+    .ui-wrapper {
+        position: absolute;
+        right: 0;
+
+        text-align: right;
+        padding: 20px 20px;
+    }
+
+
+    .btn-mode {
+        margin-left: 10px;
+        width: 60px;
+        height: 30px;
+        color: #999999;
+        font-weight: bold;
+        opacity: 1;
+    }
+
+    .btn-mode.off {
+        opacity: 0.2;
+    }
+
+    .btn-wrapper {
+        position: absolute;
+        width: 70%;
+        transform: translateX(-50%);
+
+        bottom: 0;
+        text-align: center;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+
+
     .btn-wrapper button {
-        width: 40px; height: 40px; background-color: #000000; margin: 0 8px;
+        width: 30px;
+        height: 30px;
+        background-color: #000000; margin: 3px 3px; padding: 3px 10px;
     }
 
     .btn-wrapper button.off {
@@ -48,9 +81,7 @@
     }
 
     .btn-wrapper button.btn-next {
-        width: 100px;
         background-color: #224d94;
-        display: none;
     }
 
     .msg-area{
@@ -70,21 +101,25 @@
     }
 
 
+
 </style>
 
 <body>
 <main class="site-wrapper">
     <div class="content" id="obj_stage"></div>
     <div class="msg-area"><p>edaddd</p></div>
+    <div class="ui-wrapper">
+        <button class="btn-mode music off">music</button>
+        <button class="btn-mode mic">mic</button>
+    </div>
+
     <div class="btn-wrapper">
         <button class="btn-visual">0</button>
         <button class="btn-visual off">1</button>
         <button class="btn-visual off">2</button>
-        <button class="btn-visual off">3</button>
-        <button class="btn-next">next music</button>
+        <button class="btn-next"> > </button>
     </div>
 </main>
-
 
 <!-- Frame UI -->
 <!--<div class="frame-ui">
@@ -97,8 +132,7 @@
     <button class="btn-back" data-path=""><i class="material-icons">arrow_back</i><span class="blind">Back</span></button>
 </div>-->
 
-
-<script src="js/audio_vis.js?unq=1211"></script>
+<script src="js/main5.js?unq=122211"></script>
 <script>
 
     var obj_stage = document.getElementById("obj_stage");
