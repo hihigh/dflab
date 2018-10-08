@@ -19,8 +19,8 @@ var SoundVisualizer = function(args){
     var avg_frequency;
     var avg_time, pow_time;
 
-    var mediaUrl = ["new_year_dubstep_minimix.mp3"], // "monny_son.mp3"
-        mediaIndex = 3,
+    var mediaUrl = ["./new_year_dubstep_minimix.mp3"], // "monny_son.mp3"
+        mediaIndex = 0,
         fftSize = 1024;
 
     var visualArr = [];
