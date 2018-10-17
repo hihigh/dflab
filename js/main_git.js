@@ -301,8 +301,10 @@ var SoundVisualizer = function(args){
         var waveTrapezoid = new WaveTrapezoid(_this.options);
         var middleThreeRect = new MiddleThreeRect(_this.options);
         var rectLayered = new RectLayered(_this.options);
+        var devideCenterShape = new DevideCenterShape(_this.options);
+        var planetAroundLine = new PlanetAroundLine(_this.options);
 
-        visualArr = [rectLayered, middleThreeRect, waveTrapezoid, sideTwinTriangle, middleStickLine, middleBarMulti, circleMultiTypeContent, triangleGradient, rectMultiTypeContent, rectTypeContent, geometryShape, centerShape, waveLine];
+        visualArr = [planetAroundLine, devideCenterShape, rectLayered, middleThreeRect, waveTrapezoid, sideTwinTriangle, middleStickLine, middleBarMulti, circleMultiTypeContent, triangleGradient, rectMultiTypeContent, rectTypeContent, geometryShape, centerShape, waveLine];
 
         var btn = document.querySelectorAll(".btn-visual");
         for(var i=0 ; i<visualArr.length ; i++){
@@ -485,13 +487,238 @@ var SoundVisualizer = function(args){
 
 
 
+///////////////////////////////////////////////////////
+// Planet Around Line
+///////////////////////////////////////////////////////
+class PlanetAroundLine extends PIXI.Graphics {
+    constructor(opt){
+        super();
+        this.setting(opt);
+    }
+
+    setting(opt){
+        this.options = opt;
+
+        this.container = new PIXI.Sprite();
+        this.container.x = this.options.stageWidth/2;
+        this.container.y = this.options.stageHeight/2;
+
+        this.planetSize = Math.min(this.options.stageWidth, this.options.stageHeight)*0.6;
+
+        this.planet = new PIXI.Graphics();
+        this.planet.beginFill(0xffffff, 1);
+        this.planet.drawCircle(0,0,this.planetSize/2);
+        this.planet.endFill();
+        this.planet.tint = 0x2d62c0;
+
+        this.rectFull = new PIXI.Graphics();
+        this.rectFull.beginFill(0xffffff, 1);
+        this.rectFull.drawRect(0, 0, this.options.stageWidth, this.options.stageHeight);
+        this.rectFull.endFill();
+        this.rectFull.tint = 0x0097b4;
+
+
+        this.prevPow = 0;
+
+        this.lineContainer = new PIXI.Graphics();
+        this.lineContainerBack = new PIXI.Graphics();
+
+        this.addChildAt(this.rectFull, 0);
+        this.container.addChild(this.lineContainerBack);
+        this.container.addChild(this.planet);
+        this.container.addChild(this.lineContainer);
+        this.addChild(this.container);
+    }
+
+
+    init(){
+
+    }
+
+    render(data){
+        var color0 = data.isStrong ? 0x2d62c0 : 0x0097b4;
+        var color1 = data.isStrong ? 0x0097b4 : 0x2d62c0;
+
+
+        this.planet.tint = color1;
+        this.rectFull.tint = color0;
+
+        this.lineContainerBack.clear();
+        this.lineContainer.clear();
+        var pow = (data.avg_frequency/40);
+        var gap = (this.planetSize/10 * pow + this.planetSize/10);
+        var lineWGap = (this.planetSize*0.1);
+
+        var scalePow = 0;
+        if(data.isStrong){
+            gap = gap * 1.5;
+            lineWGap = lineWGap * 3;
+            scalePow = 0.2;
+        }
+        var max = 5;
+
+        for(var i=0 ; i<max ; i++){
+            var tgT = -gap * 2 + (i * gap);
+            var tgL = -this.planetSize/2 - lineWGap;
+            var tgR = this.planetSize/2 + lineWGap;
+
+            this.lineContainerBack.lineStyle(2, 0xffb4e2, 1);
+            this.lineContainerBack.moveTo(0, 0);
+            this.lineContainerBack.lineTo(tgL, tgT);
+            this.lineContainerBack.lineStyle(2, 0xffb4e2, 0);
+            this.lineContainerBack.lineTo(tgR, tgT);
+            this.lineContainerBack.lineStyle(2, 0xffb4e2, 1);
+            this.lineContainerBack.lineTo(0, 0);
+            this.lineContainerBack.endFill();
+
+            this.lineContainer.lineStyle(2, 0xffb4e2, 1);
+            this.lineContainer.moveTo(tgL, tgT);
+            this.lineContainer.lineTo(tgR, tgT);
+            this.lineContainer.endFill();
+        }
+
+        // this.lineContainerBack.scale.set(scalePow)
+        // this.lineContainer.scale.set(scalePow)
+
+        var dataArr = this.getAvgArr(data.frequencyData, 2);
+        this.planet.scale.set(dataArr[1]/150*0.3 + 0.8 + scalePow)
+
+    }
+
+    resize(){
+        this.rectFull.width = this.options.stageWidth;
+        this.rectFull.height = this.options.stageHeight;
+
+        this.container.x = this.options.stageWidth/2;
+        this.container.y = this.options.stageHeight/2;
+
+
+    }
+
+    // data arr를 avgNum 수 만큼의 영역으로 평균 구함
+    getAvgArr(arr, avgNum) {
+
+        var maxArange = arr.length/4;
+        var area = Math.floor(maxArange / avgNum);
+
+        var getarr = [];
+        for(var i=0 ; i<avgNum ; i++){
+            var cutArr = arr.slice(i*area, (i+1)*area);
+            getarr.push(cutArr);
+        }
+
+        var avgArr = [];
+        for(i=0 ; i<getarr.length ; i++){
+            avgArr.push(this.getAvg(getarr[i]));
+        }
+
+        return avgArr;
+    }
+
+
+    getAvg(values) {
+        var value = 0;
+
+        values.forEach(function(v) {
+            value += v;
+        })
+
+        return value / values.length;
+    };
+
+
+}
+
+
+
+
+///////////////////////////////////////////////////////
+// Devide Center Shape
+///////////////////////////////////////////////////////
+class DevideCenterShape extends PIXI.Graphics {
+    constructor(opt){
+        super();
+        this.setting(opt);
+    }
+
+    setting(opt){
+        this.options = opt;
+
+
+        this.rectHalf = new PIXI.Graphics();
+        this.rectHalf.beginFill(0xff5f01, 1);
+        this.rectHalf.drawRect(0, 0, this.options.stageWidth/2, this.options.stageHeight);
+        this.rectHalf.endFill();
+
+        this.rectFull = new PIXI.Graphics();
+        this.rectFull.beginFill(0xffffff, 1);
+        this.rectFull.drawRect(0, 0, this.options.stageWidth, this.options.stageHeight);
+        this.rectFull.endFill();
+        this.rectFull.tint = 0x0c459f
+        this.addChild(this.rectFull);
+        this.addChild(this.rectHalf);
+
+        this.prevPow = 0;
+        this.prevFullrectAlpha = 1;
+
+    }
+
+
+    init(){
+
+    }
+
+    render(data){
+        var color0 = data.isStrong ? 0x0c459f : 0xff5f01;
+        var color1 = data.isStrong ? 0xff5f01 : 0x0c459f;
+
+        this.rectFull.tint = color1;
+
+        var tgAlpha = data.pow_time > 5 ? 50 : 0;
+        var alpha = this.prevFullrectAlpha + (tgAlpha - this.prevFullrectAlpha)*0.3;
+        this.prevFullrectAlpha = alpha;
+        // this.rectFull.alpha = alpha;
+
+
+
+        var halfW = this.options.stageWidth/2;
+        var halfH = this.options.stageHeight/2;
+
+        var pow = data.avg_frequency/100 * halfW ;
+        var tgPow = this.prevPow + (pow - this.prevPow)*0.3;
+        this.prevPow = tgPow;
+
+        this.rectHalf.clear();
+        this.rectHalf.beginFill(color0, 1);
+        this.rectHalf.moveTo(0, 0);
+        this.rectHalf.lineTo(halfW, 0);
+        this.rectHalf.lineTo(halfW-pow, halfH + alpha);
+        this.rectHalf.lineTo(halfW+pow, halfH - alpha);
+        this.rectHalf.lineTo(halfW, halfH*2);
+        this.rectHalf.lineTo(0, halfH*2);
+        this.rectHalf.lineTo(0, 0);
+        this.rectHalf.endFill();
+
+
+        // this.rectHalf.alpha = alpha;
+    }
+
+    resize(){
+        this.rectFull.width = this.options.stageWidth;
+        this.rectFull.height = this.options.stageHeight;
+    }
+
+
+}
+
+
 
 
 
 
 
 ///////////////////////////////////////////////////////
-// Box
+// Rect layered
 ///////////////////////////////////////////////////////
 class RectLayered extends PIXI.Graphics {
     constructor(opt){
